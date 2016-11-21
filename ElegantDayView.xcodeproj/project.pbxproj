@@ -16,6 +16,19 @@
 		73DEC8D71DE2494200EA0144 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8D51DE2494200EA0144 /* LaunchScreen.storyboard */; };
 		73DEC8E01DE2497D00EA0144 /* ElegantDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DEC8DF1DE2497D00EA0144 /* ElegantDayView.m */; };
 		73DEC8E31DE24CF700EA0144 /* Tick.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DEC8E21DE24CF700EA0144 /* Tick.m */; };
+		73DEC8F21DE29B7300EA0144 /* Source Sans Pro 200.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8E61DE29B7300EA0144 /* Source Sans Pro 200.ttf */; };
+		73DEC8F31DE29B7300EA0144 /* Source Sans Pro 200italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8E71DE29B7300EA0144 /* Source Sans Pro 200italic.ttf */; };
+		73DEC8F41DE29B7300EA0144 /* Source Sans Pro 300.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8E81DE29B7300EA0144 /* Source Sans Pro 300.ttf */; };
+		73DEC8F51DE29B7300EA0144 /* Source Sans Pro 300italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8E91DE29B7300EA0144 /* Source Sans Pro 300italic.ttf */; };
+		73DEC8F61DE29B7300EA0144 /* Source Sans Pro 600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8EA1DE29B7300EA0144 /* Source Sans Pro 600.ttf */; };
+		73DEC8F71DE29B7300EA0144 /* Source Sans Pro 600italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8EB1DE29B7300EA0144 /* Source Sans Pro 600italic.ttf */; };
+		73DEC8F81DE29B7300EA0144 /* Source Sans Pro 700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8EC1DE29B7300EA0144 /* Source Sans Pro 700.ttf */; };
+		73DEC8F91DE29B7300EA0144 /* Source Sans Pro 700italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8ED1DE29B7300EA0144 /* Source Sans Pro 700italic.ttf */; };
+		73DEC8FA1DE29B7300EA0144 /* Source Sans Pro 900.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8EE1DE29B7300EA0144 /* Source Sans Pro 900.ttf */; };
+		73DEC8FB1DE29B7300EA0144 /* Source Sans Pro 900italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8EF1DE29B7300EA0144 /* Source Sans Pro 900italic.ttf */; };
+		73DEC8FC1DE29B7300EA0144 /* Source Sans Pro italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8F01DE29B7300EA0144 /* Source Sans Pro italic.ttf */; };
+		73DEC8FD1DE29B7300EA0144 /* Source Sans Pro regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8F11DE29B7300EA0144 /* Source Sans Pro regular.ttf */; };
+		73DEC9001DE29E8700EA0144 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DEC8FF1DE29E8700EA0144 /* Event.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +47,20 @@
 		73DEC8DF1DE2497D00EA0144 /* ElegantDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElegantDayView.m; sourceTree = "<group>"; };
 		73DEC8E11DE24CF700EA0144 /* Tick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tick.h; sourceTree = "<group>"; };
 		73DEC8E21DE24CF700EA0144 /* Tick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tick.m; sourceTree = "<group>"; };
+		73DEC8E61DE29B7300EA0144 /* Source Sans Pro 200.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 200.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro 200.ttf"; sourceTree = "<group>"; };
+		73DEC8E71DE29B7300EA0144 /* Source Sans Pro 200italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 200italic.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro 200italic.ttf"; sourceTree = "<group>"; };
+		73DEC8E81DE29B7300EA0144 /* Source Sans Pro 300.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 300.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro 300.ttf"; sourceTree = "<group>"; };
+		73DEC8E91DE29B7300EA0144 /* Source Sans Pro 300italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 300italic.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro 300italic.ttf"; sourceTree = "<group>"; };
+		73DEC8EA1DE29B7300EA0144 /* Source Sans Pro 600.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 600.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro 600.ttf"; sourceTree = "<group>"; };
+		73DEC8EB1DE29B7300EA0144 /* Source Sans Pro 600italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 600italic.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro 600italic.ttf"; sourceTree = "<group>"; };
+		73DEC8EC1DE29B7300EA0144 /* Source Sans Pro 700.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 700.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro 700.ttf"; sourceTree = "<group>"; };
+		73DEC8ED1DE29B7300EA0144 /* Source Sans Pro 700italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 700italic.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro 700italic.ttf"; sourceTree = "<group>"; };
+		73DEC8EE1DE29B7300EA0144 /* Source Sans Pro 900.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 900.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro 900.ttf"; sourceTree = "<group>"; };
+		73DEC8EF1DE29B7300EA0144 /* Source Sans Pro 900italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 900italic.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro 900italic.ttf"; sourceTree = "<group>"; };
+		73DEC8F01DE29B7300EA0144 /* Source Sans Pro italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro italic.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro italic.ttf"; sourceTree = "<group>"; };
+		73DEC8F11DE29B7300EA0144 /* Source Sans Pro regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro regular.ttf"; path = "../../../Library/Fonts/skyfonts-google/Source Sans Pro regular.ttf"; sourceTree = "<group>"; };
+		73DEC8FE1DE29E8700EA0144 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		73DEC8FF1DE29E8700EA0144 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +93,7 @@
 		73DEC8C31DE2494200EA0144 /* ElegantDayView */ = {
 			isa = PBXGroup;
 			children = (
+				73DEC8E51DE29B6500EA0144 /* Resources */,
 				73DEC8C71DE2494200EA0144 /* AppDelegate.h */,
 				73DEC8C81DE2494200EA0144 /* AppDelegate.m */,
 				73DEC8CA1DE2494200EA0144 /* ViewController.h */,
@@ -73,6 +101,8 @@
 				73DEC8CD1DE2494200EA0144 /* Main.storyboard */,
 				73DEC8DE1DE2497C00EA0144 /* ElegantDayView.h */,
 				73DEC8DF1DE2497D00EA0144 /* ElegantDayView.m */,
+				73DEC8FE1DE29E8700EA0144 /* Event.h */,
+				73DEC8FF1DE29E8700EA0144 /* Event.m */,
 				73DEC8E11DE24CF700EA0144 /* Tick.h */,
 				73DEC8E21DE24CF700EA0144 /* Tick.m */,
 				73DEC8D31DE2494200EA0144 /* Assets.xcassets */,
@@ -90,6 +120,25 @@
 				73DEC8C51DE2494200EA0144 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		73DEC8E51DE29B6500EA0144 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				73DEC8E61DE29B7300EA0144 /* Source Sans Pro 200.ttf */,
+				73DEC8E71DE29B7300EA0144 /* Source Sans Pro 200italic.ttf */,
+				73DEC8E81DE29B7300EA0144 /* Source Sans Pro 300.ttf */,
+				73DEC8E91DE29B7300EA0144 /* Source Sans Pro 300italic.ttf */,
+				73DEC8EA1DE29B7300EA0144 /* Source Sans Pro 600.ttf */,
+				73DEC8EB1DE29B7300EA0144 /* Source Sans Pro 600italic.ttf */,
+				73DEC8EC1DE29B7300EA0144 /* Source Sans Pro 700.ttf */,
+				73DEC8ED1DE29B7300EA0144 /* Source Sans Pro 700italic.ttf */,
+				73DEC8EE1DE29B7300EA0144 /* Source Sans Pro 900.ttf */,
+				73DEC8EF1DE29B7300EA0144 /* Source Sans Pro 900italic.ttf */,
+				73DEC8F01DE29B7300EA0144 /* Source Sans Pro italic.ttf */,
+				73DEC8F11DE29B7300EA0144 /* Source Sans Pro regular.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,9 +200,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73DEC8F61DE29B7300EA0144 /* Source Sans Pro 600.ttf in Resources */,
+				73DEC8F81DE29B7300EA0144 /* Source Sans Pro 700.ttf in Resources */,
+				73DEC8FD1DE29B7300EA0144 /* Source Sans Pro regular.ttf in Resources */,
+				73DEC8FB1DE29B7300EA0144 /* Source Sans Pro 900italic.ttf in Resources */,
+				73DEC8F31DE29B7300EA0144 /* Source Sans Pro 200italic.ttf in Resources */,
+				73DEC8F21DE29B7300EA0144 /* Source Sans Pro 200.ttf in Resources */,
+				73DEC8FC1DE29B7300EA0144 /* Source Sans Pro italic.ttf in Resources */,
 				73DEC8D71DE2494200EA0144 /* LaunchScreen.storyboard in Resources */,
+				73DEC8F91DE29B7300EA0144 /* Source Sans Pro 700italic.ttf in Resources */,
+				73DEC8F51DE29B7300EA0144 /* Source Sans Pro 300italic.ttf in Resources */,
 				73DEC8D41DE2494200EA0144 /* Assets.xcassets in Resources */,
+				73DEC8F71DE29B7300EA0144 /* Source Sans Pro 600italic.ttf in Resources */,
 				73DEC8CF1DE2494200EA0144 /* Main.storyboard in Resources */,
+				73DEC8F41DE29B7300EA0144 /* Source Sans Pro 300.ttf in Resources */,
+				73DEC8FA1DE29B7300EA0144 /* Source Sans Pro 900.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +231,7 @@
 				73DEC8C61DE2494200EA0144 /* main.m in Sources */,
 				73DEC8E31DE24CF700EA0144 /* Tick.m in Sources */,
 				73DEC8E01DE2497D00EA0144 /* ElegantDayView.m in Sources */,
+				73DEC9001DE29E8700EA0144 /* Event.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

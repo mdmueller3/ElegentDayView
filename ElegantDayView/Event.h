@@ -1,5 +1,5 @@
 //
-//  ElegantDayView.h
+//  Event.h
 //  ElegantDayView
 //
 //  Created by Michael Mueller on 11/20/16.
@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ElegantDayView : UIScrollView
+@interface Event : UIView
 
--(void)addEvents:(NSArray*)events;
+@property (strong, nonatomic) NSString *name;
+
+@property CGFloat start;
+@property CGFloat end;
 
 @end

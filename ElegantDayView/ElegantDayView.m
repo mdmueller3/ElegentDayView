@@ -8,6 +8,7 @@
 
 #import "ElegantDayView.h"
 #import "Tick.h"
+#import "Event.h"
 
 @interface ElegantDayView()
 
@@ -57,22 +58,45 @@
     
     while(i < _numTicks){
         Tick *tick;
-        if(i % 4 == 0){
-            tick = [[Tick alloc] initWithFrame:CGRectMake(45, 100, self.frame.size.width - 90, _tickHeight) lineType:LineTypeStraight];
+        
+        CGFloat nextY;
+        if(!lastTick){
+            nextY = 100;
         } else {
-            tick = [[Tick alloc] initWithFrame:CGRectMake(45, 100, self.frame.size.width - 90,_tickHeight) lineType:LineTypeDashed];
+            nextY = lastTick.frame.origin.y + lastTick.frame.size.height;
+        }
+        
+        if(i % 4 == 0){
+            tick = [[Tick alloc] initWithFrame:CGRectMake(45, nextY, self.frame.size.width - 90, _tickHeight) lineType:LineTypeStraight];
+        } else {
+            tick = [[Tick alloc] initWithFrame:CGRectMake(45, nextY, self.frame.size.width - 90,_tickHeight) lineType:LineTypeDashed];
         }
         
         [self addSubview:tick];
         
+        lastTick = tick;
+        
         if(i % 2 == 0){
             // create tick with label
+            if(labelNum % 2 == 0){
+                [tick createLabelWithTime:[_tickTimes objectAtIndex:labelNum] size:LabelSizeLarge];
+            } else {
+                [tick createLabelWithTime:[_tickTimes objectAtIndex:labelNum] size:LabelSizeSmall];
+            }
+            labelNum++;
+        }
+        
+        if(i == _numTicks - 1){
+            self.contentSize = CGSizeMake(self.frame.size.width, lastTick.frame.origin.y + lastTick.frame.size.height + 20);
         }
         
         i++;
-        break;
         
     }
+}
+
+-(void)addEvents:(NSArray*)events{
+//    Event *event1 
 }
 
 @end

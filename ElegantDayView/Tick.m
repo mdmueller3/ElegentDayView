@@ -8,6 +8,13 @@
 
 #import "Tick.h"
 
+
+@interface Tick()
+
+@property (strong, nonatomic) CAShapeLayer *line;
+
+@end
+
 @implementation Tick
 
 /*
@@ -22,25 +29,40 @@
     self = [super initWithFrame:frame];
     
     if(self){
+        _line = [CAShapeLayer layer];
+        UIBezierPath *linePath=[UIBezierPath bezierPath];
+        CGPoint start = CGPointMake(frame.origin.x+40, 0);
+        CGPoint end = CGPointMake(frame.size.width, 0);
+        _line.lineWidth = 2.0;
+        [linePath moveToPoint: start];
+        [linePath addLineToPoint:end];
+        _line.path=linePath.CGPath;
+        _line.fillColor = nil;
+        _line.opacity = 1.0;
+        _line.strokeColor = [UIColor colorWithRed:0.89 green:0.89 blue:0.89 alpha:1.0].CGColor;
+        
         if(type == LineTypeDashed){
-            
-        } else {
-            CAShapeLayer *line = [CAShapeLayer layer];
-            UIBezierPath *linePath=[UIBezierPath bezierPath];
-            CGPoint start = CGPointMake(frame.origin.x+40, 0);
-            CGPoint end = CGPointMake(frame.size.width, 0);
-            line.lineWidth = 2.0;
-            [linePath moveToPoint: start];
-            [linePath addLineToPoint:end];
-            line.path=linePath.CGPath;
-            line.fillColor = nil;
-            line.opacity = 1.0;
-            line.strokeColor = [UIColor blackColor].CGColor;
-            [self.layer addSublayer:line];
+            [_line setLineDashPattern:
+             [NSArray arrayWithObjects:[NSNumber numberWithInt:5],
+              [NSNumber numberWithInt:4],nil]];
         }
+        [self.layer addSublayer:_line];
     }
     
     return self;
+}
+
+-(void)createLabelWithTime:(NSString *)time size:(LabelSize)size{
+    _label = [[UILabel alloc] initWithFrame:CGRectMake(0, -13, 80, 20)];
+    _label.text = time;
+    if(size == LabelSizeLarge){
+        _label.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+        _label.textColor = [UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1.0];
+    } else {
+        _label.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+        _label.textColor = [UIColor colorWithRed:0.82 green:0.82 blue:0.82 alpha:1.0];
+    }
+    [self addSubview:_label];
 }
 
 

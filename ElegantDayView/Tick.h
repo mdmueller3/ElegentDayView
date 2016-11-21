@@ -13,12 +13,19 @@ typedef enum{
     LineTypeDashed
 } LineType;
 
+typedef enum{
+    LabelSizeLarge,
+    LabelSizeSmall
+} LabelSize;
+
 @interface Tick : UIView
 
 @property LineType lineType;
+@property LabelSize labelSize;
+@property (strong, nonatomic) UILabel *label;
 
 -(instancetype)initWithFrame:(CGRect)frame lineType:(LineType)type;
 
--(void)createLabelWithTime:(NSString *)time;
+-(void)createLabelWithTime:(NSString *)time size:(LabelSize)size;
 
 @end
