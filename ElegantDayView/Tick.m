@@ -53,8 +53,10 @@
 }
 
 -(void)createLabelWithTime:(NSString *)time size:(LabelSize)size{
-    _label = [[UILabel alloc] initWithFrame:CGRectMake(0, -13, 80, 20)];
+    _label = [[UILabel alloc] initWithFrame:CGRectMake(0, -13, 70, 20)];
     _label.text = time;
+    _label.textAlignment = NSTextAlignmentRight;
+    _time = time;
     if(size == LabelSizeLarge){
         _label.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
         _label.textColor = [UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1.0];

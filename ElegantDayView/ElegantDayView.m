@@ -96,7 +96,8 @@
 }
 
 -(void)addEvents:(NSArray*)events{
-//    Event *event1 
+//    Event *event1 = [[Event alloc] init];
+//    event1.start = 8.25;
 }
 
 @end
