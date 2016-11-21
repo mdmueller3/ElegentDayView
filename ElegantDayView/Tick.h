@@ -19,4 +19,6 @@ typedef enum{
 
 -(instancetype)initWithFrame:(CGRect)frame lineType:(LineType)type;
 
+-(void)createLabelWithTime:(NSString *)time;
+
 @end

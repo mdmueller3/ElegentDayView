@@ -17,20 +17,8 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90g-I5-v4C" customClass="ElegantDayView"/>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="90g-I5-v4C" secondAttribute="trailing" id="Qb4-eL-FVz"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="90g-I5-v4C" secondAttribute="bottom" id="fs4-3D-S5V"/>
-                            <constraint firstItem="90g-I5-v4C" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="mP5-Fa-JQt"/>
-                            <constraint firstItem="90g-I5-v4C" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="n1Z-A0-cqD"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="dayView" destination="90g-I5-v4C" id="Huc-cl-ONV"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

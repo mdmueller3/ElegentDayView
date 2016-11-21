@@ -27,9 +27,9 @@
         } else {
             CAShapeLayer *line = [CAShapeLayer layer];
             UIBezierPath *linePath=[UIBezierPath bezierPath];
-            CGPoint start = CGPointMake(frame.origin.x, 0);
+            CGPoint start = CGPointMake(frame.origin.x+40, 0);
             CGPoint end = CGPointMake(frame.size.width, 0);
-            line.lineWidth = 3.0;
+            line.lineWidth = 2.0;
             [linePath moveToPoint: start];
             [linePath addLineToPoint:end];
             line.path=linePath.CGPath;

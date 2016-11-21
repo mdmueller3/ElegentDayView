@@ -9,24 +9,70 @@
 #import "ElegantDayView.h"
 #import "Tick.h"
 
+@interface ElegantDayView()
+
+@property (strong, nonatomic) NSMutableArray *ticks;
+@property (strong, nonatomic) NSArray *tickTimes;
+@property int numTicks;
+@property int tickHeight;
+
+@end
+
+
+
 @implementation ElegantDayView
 
--(void)awakeFromNib{
-    [super awakeFromNib];
+-(instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
     
-    [self setup];
+    if(self){
+        [self setup];
+    }
+    
+    return self;
 }
 
 -(void)setup{
-    self.backgroundColor = [UIColor grayColor];
-    NSLog(@"frame length: %f", self.frame.size.width);
-    Tick *tick = [[Tick alloc] initWithFrame:CGRectMake(100, 100, 300, 100) lineType:LineTypeStraight];
-    tick.layer.borderColor = [UIColor redColor].CGColor;
-    tick.layer.borderWidth = 1.0;
-    [self addSubview:tick];
     
-    self.layer.borderWidth = 3.0;
-    self.layer.borderColor = [UIColor yellowColor].CGColor;
+    _numTicks = 96;
+    _tickHeight = 35;
+    self.contentSize = CGSizeMake(self.frame.size.width, 1000);
+    
+    [self createTickTimes];
+    [self createTicks];
+
+}
+
+-(void)createTickTimes{
+    _tickTimes = @[@"12:00 am",@"12:30 am",@"1:00 am", @"1:30 am", @"2:00 am", @"2:30 am", @"3:00 am", @"3:30 am", @"4:00 am", @"4:30 am", @"5:00 am", @"5:30 am", @"6:00 am", @"6:30 am", @"7:00 am", @"7:30 am", @"8:00 am", @"8:30 am", @"9:00 am", @"9:30 am", @"10:00 am", @"10:30 am", @"11:00 am", @"11:30 am", @"12:00 pm", @"12:30 pm", @"1:00 pm", @"1:30 pm", @"2:00 pm", @"2:30 pm", @"3:00 pm", @"3:30 pm", @"4:00 pm", @"4:30 pm", @"5:00 pm", @"5:30 pm", @"6:00 pm", @"6:30 pm", @"7:00 pm", @"7:30 pm", @"8:00 pm", @"8:30 pm", @"9:00 pm", @"9:30 pm", @"10:00 pm", @"10:30 pm", @"11:00 pm", @"11:30 pm"];
+}
+
+-(void)createTicks{
+    // if i = even, create tick with label
+    // if i = odd, just create tick
+    int i = 0;
+    int labelNum = 0; // index num (if even, create large text. if odd, create small text)
+    
+    Tick *lastTick;
+    
+    while(i < _numTicks){
+        Tick *tick;
+        if(i % 4 == 0){
+            tick = [[Tick alloc] initWithFrame:CGRectMake(45, 100, self.frame.size.width - 90, _tickHeight) lineType:LineTypeStraight];
+        } else {
+            tick = [[Tick alloc] initWithFrame:CGRectMake(45, 100, self.frame.size.width - 90,_tickHeight) lineType:LineTypeDashed];
+        }
+        
+        [self addSubview:tick];
+        
+        if(i % 2 == 0){
+            // create tick with label
+        }
+        
+        i++;
+        break;
+        
+    }
 }
 
 @end

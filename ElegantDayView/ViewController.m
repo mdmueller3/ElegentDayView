@@ -11,7 +11,7 @@
 
 @interface ViewController ()
 
-@property (strong, nonatomic) IBOutlet ElegantDayView *dayView;
+@property (strong, nonatomic) ElegantDayView *dayView;
 
 @end
 
@@ -19,6 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _dayView = [[ElegantDayView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:_dayView];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
