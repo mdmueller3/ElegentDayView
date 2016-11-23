@@ -11,7 +11,6 @@
 		73DEC8C91DE2494200EA0144 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DEC8C81DE2494200EA0144 /* AppDelegate.m */; };
 		73DEC8CC1DE2494200EA0144 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DEC8CB1DE2494200EA0144 /* ViewController.m */; };
 		73DEC8CF1DE2494200EA0144 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8CD1DE2494200EA0144 /* Main.storyboard */; };
-		73DEC8D21DE2494200EA0144 /* ElegantDayView.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73DEC8D01DE2494200EA0144 /* ElegantDayView.xcdatamodeld */; };
 		73DEC8D41DE2494200EA0144 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8D31DE2494200EA0144 /* Assets.xcassets */; };
 		73DEC8D71DE2494200EA0144 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8D51DE2494200EA0144 /* LaunchScreen.storyboard */; };
 		73DEC8E01DE2497D00EA0144 /* ElegantDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DEC8DF1DE2497D00EA0144 /* ElegantDayView.m */; };
@@ -39,7 +38,6 @@
 		73DEC8CA1DE2494200EA0144 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		73DEC8CB1DE2494200EA0144 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		73DEC8CE1DE2494200EA0144 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		73DEC8D11DE2494200EA0144 /* ElegantDayView.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ElegantDayView.xcdatamodel; sourceTree = "<group>"; };
 		73DEC8D31DE2494200EA0144 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73DEC8D61DE2494200EA0144 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73DEC8D81DE2494200EA0144 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -108,7 +106,6 @@
 				73DEC8D31DE2494200EA0144 /* Assets.xcassets */,
 				73DEC8D51DE2494200EA0144 /* LaunchScreen.storyboard */,
 				73DEC8D81DE2494200EA0144 /* Info.plist */,
-				73DEC8D01DE2494200EA0144 /* ElegantDayView.xcdatamodeld */,
 				73DEC8C41DE2494200EA0144 /* Supporting Files */,
 			);
 			path = ElegantDayView;
@@ -225,7 +222,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73DEC8D21DE2494200EA0144 /* ElegantDayView.xcdatamodeld in Sources */,
 				73DEC8CC1DE2494200EA0144 /* ViewController.m in Sources */,
 				73DEC8C91DE2494200EA0144 /* AppDelegate.m in Sources */,
 				73DEC8C61DE2494200EA0144 /* main.m in Sources */,
@@ -391,19 +387,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		73DEC8D01DE2494200EA0144 /* ElegantDayView.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				73DEC8D11DE2494200EA0144 /* ElegantDayView.xcdatamodel */,
-			);
-			currentVersion = 73DEC8D11DE2494200EA0144 /* ElegantDayView.xcdatamodel */;
-			path = ElegantDayView.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 73DEC8B91DE2494200EA0144 /* Project object */;
 }

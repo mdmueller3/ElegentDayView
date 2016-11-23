@@ -18,33 +18,57 @@
 }
 */
 
--(instancetype)initWithFrame:(CGRect)frame Start:(int)startIndex End:(int)endIndex Name:(NSString *)name{
-    self = [super initWithFrame:frame];
+-(instancetype)initWithName:(NSString *)name{
+    self = [super init];
     if(self){
-        if(endIndex <= startIndex){
-            return self;
-        }
-        _startIndex = startIndex;
-        _endIndex = endIndex;
         self.layer.borderWidth = 3.0;
         self.layer.cornerRadius = 5.0;
         self.layer.borderColor = [UIColor colorWithRed:0.40 green:0.62 blue:0.86 alpha:1.0].CGColor;
-        
-        UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        background.backgroundColor = [UIColor colorWithRed:0.40 green:0.62 blue:0.86 alpha:1.0];
-        background.alpha = 0.4;
-        [self addSubview:background];
-        
         _name = name;
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height/(endIndex-startIndex))];
-        _nameLabel.textAlignment = NSTextAlignmentCenter;
-        _nameLabel.text = _name;
-        _nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
-        _nameLabel.textColor = [UIColor whiteColor];
-        [background addSubview:_nameLabel];
-        
     }
     return self;
 }
+
+-(void)setupWithFrame:(CGRect)frame{
+    self.frame = frame;
+    UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    background.backgroundColor = [UIColor colorWithRed:0.40 green:0.62 blue:0.86 alpha:1.0];
+    background.alpha = 0.4;
+    [self addSubview:background];
+    
+    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height/(_endIndex-_startIndex))];
+    _nameLabel.textAlignment = NSTextAlignmentCenter;
+    _nameLabel.text = _name;
+    _nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+    _nameLabel.textColor = [UIColor whiteColor];
+    [background addSubview:_nameLabel];
+}
+
+//-(instancetype)initWithFrame:(CGRect)frame Name:(NSString *)name{
+//    self = [super initWithFrame:frame];
+//    if(self){
+//        if(_endIndex <= _startIndex){
+//            return self;
+//        }
+//        self.layer.borderWidth = 3.0;
+//        self.layer.cornerRadius = 5.0;
+//        self.layer.borderColor = [UIColor colorWithRed:0.40 green:0.62 blue:0.86 alpha:1.0].CGColor;
+//        
+//        UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+//        background.backgroundColor = [UIColor colorWithRed:0.40 green:0.62 blue:0.86 alpha:1.0];
+//        background.alpha = 0.4;
+//        [self addSubview:background];
+//        
+//        _name = name;
+//        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height/(_endIndex-_startIndex))];
+//        _nameLabel.textAlignment = NSTextAlignmentCenter;
+//        _nameLabel.text = _name;
+//        _nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+//        _nameLabel.textColor = [UIColor whiteColor];
+//        [background addSubview:_nameLabel];
+//        
+//    }
+//    return self;
+//}
 
 @end

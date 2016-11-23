@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSMutableArray *ticks;
 @property (strong, nonatomic) NSArray *tickTimes;
 @property (strong, nonatomic) NSArray *times;
+@property (strong, nonatomic) NSMutableArray *events;
 
 @property int numTicks;
 @property int tickHeight;
@@ -40,12 +41,16 @@
     _numTicks = 96;
     _tickHeight = 35;
     self.contentSize = CGSizeMake(self.frame.size.width, 1000);
+    self.layer.borderColor = [UIColor colorWithRed:0.82 green:0.82 blue:0.82 alpha:1.0].CGColor;
+    self.layer.borderWidth = 1.0;
     
     [self createTickTimes];
     [self createTicks];
     
+    _events = [[NSMutableArray alloc] init];
     
-    [self addEvents:nil];
+    [self createSampleEvents];
+    [self addEvents:_events];
 
 }
 
@@ -118,17 +123,30 @@
     return (end-start)*_tickHeight;
 }
 
--(void)addEvents:(NSArray*)events{
+-(void)createSampleEvents{
+    Event *event1 = [[Event alloc] initWithName:@"Coffee"];
+    event1.startIndex = 5;
+    event1.endIndex = 10;
+    [_events addObject:event1];
+    
+    Event *event2 = [[Event alloc] initWithName:@"Work"];
+    event2.startIndex = 10;
+    event2.endIndex = 30;
+    [_events addObject:event2];
+}
 
-    Tick *selectedTick = [_ticks objectAtIndex:5];
-    NSLog(@"x: %f, y: %f, width: %f, height: %f", selectedTick.frame.origin.x, selectedTick.frame.origin.y, selectedTick.frame.size.width, selectedTick.frame.size.height);
-    
-    int start = 5;
-    int end = 10;
-    CGRect frame = CGRectMake((selectedTick.lineStart.x+45) + 25, selectedTick.frame.origin.y, (selectedTick.lineEnd.x - selectedTick.lineStart.x) - 50, [self getHeightFromStartIndex:start EndIndex:end]);
-    Event *firstEvent = [[Event alloc] initWithFrame:frame Start:start End:end Name:@"Coffee"];
-    [self addSubview:firstEvent];
-    
+-(void)addEvents:(NSArray*)events{
+    for(Event *event in events){
+        
+        int start = event.startIndex;
+        int end = event.endIndex;
+        
+        Tick *startTick = [_ticks objectAtIndex:start];
+        
+        CGRect frame = CGRectMake((startTick.lineStart.x+45) + 25, startTick.frame.origin.y, (startTick.lineEnd.x - startTick.lineStart.x) - 50, [self getHeightFromStartIndex:start EndIndex:end]);
+        [event setupWithFrame:frame];
+        [self addSubview:event];
+    }
 }
 
 @end

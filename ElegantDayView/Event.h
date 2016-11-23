@@ -17,6 +17,7 @@
 @property int startIndex;
 @property int endIndex;
 
--(instancetype)initWithFrame:(CGRect)frame Start:(int)startIndex End:(int)endIndex Name:(NSString *)name;
+-(instancetype)initWithName:(NSString *)name;
+-(void)setupWithFrame:(CGRect)frame;
 
 @end
