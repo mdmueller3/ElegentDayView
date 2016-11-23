@@ -126,7 +126,7 @@
     int start = 5;
     int end = 10;
     CGRect frame = CGRectMake((selectedTick.lineStart.x+45) + 25, selectedTick.frame.origin.y, (selectedTick.lineEnd.x - selectedTick.lineStart.x) - 50, [self getHeightFromStartIndex:start EndIndex:end]);
-    Event *firstEvent = [[Event alloc] initWithFrame:frame Start:start End:end];
+    Event *firstEvent = [[Event alloc] initWithFrame:frame Start:start End:end Name:@"Coffee"];
     [self addSubview:firstEvent];
     
 }

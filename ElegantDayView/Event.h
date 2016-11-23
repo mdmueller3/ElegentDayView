@@ -11,11 +11,12 @@
 @interface Event : UIView
 
 @property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) UILabel *nameLabel;
 
 // Both out of 96 (24 * 4 -- # of 15 min intervals in 24 hours)
 @property int startIndex;
 @property int endIndex;
 
--(instancetype)initWithFrame:(CGRect)frame Start:(int)startIndex End:(int)endIndex;
+-(instancetype)initWithFrame:(CGRect)frame Start:(int)startIndex End:(int)endIndex Name:(NSString *)name;
 
 @end
