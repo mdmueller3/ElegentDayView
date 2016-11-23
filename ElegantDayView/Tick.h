@@ -23,10 +23,14 @@ typedef enum{
 @property LineType lineType;
 @property LabelSize labelSize;
 @property (strong, nonatomic) UILabel *label;
-@property NSString *time;
+@property NSString *timeLabel;
+@property int index;
+
+@property CGPoint lineStart;
+@property CGPoint lineEnd;
 
 -(instancetype)initWithFrame:(CGRect)frame lineType:(LineType)type;
 
--(void)createLabelWithTime:(NSString *)time size:(LabelSize)size;
+-(void)createLabelWithTime:(NSString *)timeLabel size:(LabelSize)size;
 
 @end

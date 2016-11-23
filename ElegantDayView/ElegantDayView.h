@@ -10,6 +10,8 @@
 
 @interface ElegantDayView : UIScrollView
 
+@property BOOL isEditable;
+
 -(void)addEvents:(NSArray*)events;
 
 @end

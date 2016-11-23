@@ -31,11 +31,11 @@
     if(self){
         _line = [CAShapeLayer layer];
         UIBezierPath *linePath=[UIBezierPath bezierPath];
-        CGPoint start = CGPointMake(frame.origin.x+40, 0);
-        CGPoint end = CGPointMake(frame.size.width, 0);
+        _lineStart = CGPointMake(frame.origin.x+40, 0);
+        _lineEnd = CGPointMake(frame.size.width, 0);
         _line.lineWidth = 2.0;
-        [linePath moveToPoint: start];
-        [linePath addLineToPoint:end];
+        [linePath moveToPoint: _lineStart];
+        [linePath addLineToPoint: _lineEnd];
         _line.path=linePath.CGPath;
         _line.fillColor = nil;
         _line.opacity = 1.0;
@@ -52,11 +52,11 @@
     return self;
 }
 
--(void)createLabelWithTime:(NSString *)time size:(LabelSize)size{
+-(void)createLabelWithTime:(NSString *)timeLabel size:(LabelSize)size{
     _label = [[UILabel alloc] initWithFrame:CGRectMake(0, -13, 70, 20)];
-    _label.text = time;
+    _label.text = timeLabel;
     _label.textAlignment = NSTextAlignmentRight;
-    _time = time;
+    _timeLabel = timeLabel;
     if(size == LabelSizeLarge){
         _label.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
         _label.textColor = [UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1.0];
@@ -67,6 +67,17 @@
     [self addSubview:_label];
 }
 
-
+//-(NSString *)convertToStringFromNumber:(NSNumber *)number{
+//    NSString *tod;
+//    NSNumber *time;
+//    if([number floatValue] > 12.00){
+//        time = [NSNumber numberWithFloat:[number floatValue] - 12];
+//        tod = @"pm";
+//    } else {
+//        tod = @"am";
+//    }
+//    
+//    
+//}
 
 @end

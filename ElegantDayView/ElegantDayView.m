@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) NSMutableArray *ticks;
 @property (strong, nonatomic) NSArray *tickTimes;
+@property (strong, nonatomic) NSArray *times;
+
 @property int numTicks;
 @property int tickHeight;
 
@@ -41,6 +43,9 @@
     
     [self createTickTimes];
     [self createTicks];
+    
+    
+    [self addEvents:nil];
 
 }
 
@@ -54,12 +59,17 @@
     int i = 0;
     int labelNum = 0; // index num (if even, create large text. if odd, create small text)
     
+    if(!_ticks){
+        _ticks = [[NSMutableArray alloc] init];
+    }
+    
     Tick *lastTick;
+    
+    CGFloat nextY = 0.0;
     
     while(i < _numTicks){
         Tick *tick;
         
-        CGFloat nextY;
         if(!lastTick){
             nextY = 100;
         } else {
@@ -73,6 +83,7 @@
         }
         
         [self addSubview:tick];
+        [_ticks addObject:tick];
         
         lastTick = tick;
         
@@ -86,18 +97,38 @@
             labelNum++;
         }
         
-        if(i == _numTicks - 1){
-            self.contentSize = CGSizeMake(self.frame.size.width, lastTick.frame.origin.y + lastTick.frame.size.height + 20);
-        }
-        
         i++;
         
+        tick.index = i;
+        
     }
+    Tick *tick = [[Tick alloc] initWithFrame:CGRectMake(45, nextY, self.frame.size.width - 90, _tickHeight) lineType:LineTypeDashed];
+    [self addSubview:tick];
+    [_ticks addObject:tick];
+    nextY = tick.frame.origin.y + tick.frame.size.height;
+    // Add 12:00 am to the bottom
+    Tick *finalTick = [[Tick alloc] initWithFrame:CGRectMake(45, nextY, self.frame.size.width - 90, _tickHeight) lineType:LineTypeStraight];
+    [self addSubview:finalTick];
+    [_ticks addObject:finalTick];
+    [finalTick createLabelWithTime:@"12:00 am" size:LabelSizeLarge];
+    self.contentSize = CGSizeMake(self.frame.size.width, finalTick.frame.origin.y + finalTick.frame.size.height + 20);
+}
+
+-(CGFloat)getHeightFromStartIndex:(int)start EndIndex:(int)end{
+    return (end-start)*_tickHeight;
 }
 
 -(void)addEvents:(NSArray*)events{
-//    Event *event1 = [[Event alloc] init];
-//    event1.start = 8.25;
+
+    Tick *selectedTick = [_ticks objectAtIndex:5];
+    NSLog(@"x: %f, y: %f, width: %f, height: %f", selectedTick.frame.origin.x, selectedTick.frame.origin.y, selectedTick.frame.size.width, selectedTick.frame.size.height);
+    
+    int start = 5;
+    int end = 10;
+    CGRect frame = CGRectMake((selectedTick.lineStart.x+45) + 25, selectedTick.frame.origin.y, (selectedTick.lineEnd.x - selectedTick.lineStart.x) - 50, [self getHeightFromStartIndex:start EndIndex:end]);
+    Event *firstEvent = [[Event alloc] initWithFrame:frame Start:start End:end];
+    [self addSubview:firstEvent];
+    
 }
 
 @end

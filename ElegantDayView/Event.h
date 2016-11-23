@@ -12,7 +12,10 @@
 
 @property (strong, nonatomic) NSString *name;
 
-@property CGFloat start;
-@property CGFloat end;
+// Both out of 96 (24 * 4 -- # of 15 min intervals in 24 hours)
+@property int startIndex;
+@property int endIndex;
+
+-(instancetype)initWithFrame:(CGRect)frame Start:(int)startIndex End:(int)endIndex;
 
 @end
