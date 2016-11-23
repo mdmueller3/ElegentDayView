@@ -51,7 +51,50 @@
     
     [self createSampleEvents];
     [self addEvents:_events];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(EDVTap:)];
+    [self addGestureRecognizer:tap];
+}
 
+-(void)EDVTap:(UITapGestureRecognizer *)tapRecognizer{
+    CGPoint touchPoint = [tapRecognizer locationInView:self];
+    
+    int index = touchPoint.y/_tickHeight;
+    Tick *tick;
+    if(index >= 0 && index < [_ticks count]){
+        tick = [_ticks objectAtIndex:index];
+        BOOL lookingForRightTick = YES;
+        while(lookingForRightTick && (index>=0 && index < [_ticks count])){
+            if(touchPoint.y < tick.frame.origin.y){
+                index--;
+                tick = [_ticks objectAtIndex:index];
+            } else if (touchPoint.y > tick.frame.origin.y + tick.frame.origin.y){
+                index++;
+                tick = [_ticks objectAtIndex:index];
+            } else {
+                lookingForRightTick = NO;
+            }
+        }
+    }
+    if(tick){
+        Event *event = [[Event alloc] init];
+        event.startIndex = tick.index;
+        event.endIndex = tick.index + 1;
+        [event setupWithFrame:[self getEventFrameFromTick:tick]];
+        [_events addObject:event];
+        [self addSubview:event];
+        [event.nameLabel becomeFirstResponder];
+    }
+}
+
+-(void)tappedEvent:(UITapGestureRecognizer *)tapRecognizer{
+    Event *event = (Event *)tapRecognizer.view;
+    [event editMode];
+    NSLog(@"%@", event.name);
+}
+
+-(void)longPress:(UILongPressGestureRecognizer *)longPressRecognizer{
+    NSLog(@"hello");
 }
 
 -(void)createTickTimes{
@@ -106,6 +149,7 @@
         
         tick.index = i;
         
+        
     }
     Tick *tick = [[Tick alloc] initWithFrame:CGRectMake(45, nextY, self.frame.size.width - 90, _tickHeight) lineType:LineTypeDashed];
     [self addSubview:tick];
@@ -124,15 +168,22 @@
 }
 
 -(void)createSampleEvents{
-    Event *event1 = [[Event alloc] initWithName:@"Coffee"];
+    Event *event1 = [[Event alloc] init];
+    [event1 setName:@"Work"];
     event1.startIndex = 5;
     event1.endIndex = 10;
     [_events addObject:event1];
     
-    Event *event2 = [[Event alloc] initWithName:@"Work"];
+    Event *event2 = [[Event alloc] init];
+    [event2 setName:@"Coffee"];
     event2.startIndex = 10;
     event2.endIndex = 30;
+    event2.color = [UIColor colorWithRed:0.91 green:0.45 blue:0.45 alpha:1.0];
     [_events addObject:event2];
+}
+
+-(CGRect)getEventFrameFromTick:(Tick*)tick{
+    return CGRectMake((tick.lineStart.x+45) + 25, tick.frame.origin.y, (tick.lineEnd.x - tick.lineStart.x) - 50, _tickHeight);
 }
 
 -(void)addEvents:(NSArray*)events{
@@ -140,6 +191,9 @@
         
         int start = event.startIndex;
         int end = event.endIndex;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedEvent:)];
+        [event addGestureRecognizer:tap];
         
         Tick *startTick = [_ticks objectAtIndex:start];
         

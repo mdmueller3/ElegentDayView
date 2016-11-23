@@ -22,6 +22,7 @@
     
     _dayView = [[ElegantDayView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:_dayView];
+    _dayView.isEditable = YES;
     // Do any additional setup after loading the view, typically from a nib.
 }
 
