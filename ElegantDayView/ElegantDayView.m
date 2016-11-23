@@ -84,10 +84,10 @@
         [_events addObject:event];
         [self addSubview:event];
         
-        [event.upButton addTarget:self action:@selector(upPressed:) forControlEvents:UIControlEventTouchDragExit];
+        [event.upButton addTarget:self action:@selector(upPressed:WithEvent:) forControlEvents:UIControlEventTouchDragExit];
 //        [event.upButton addTarget:self action:@selector(dragMoving:withEvent:) forControlEvents: UIControlEventTouchDragInside];
         
-        [event.downButton addTarget:self action:@selector(downPressed:) forControlEvents:UIControlEventTouchDragExit];
+        [event.downButton addTarget:self action:@selector(downPressed:WithEvent:) forControlEvents:UIControlEventTouchDragExit];
         [event editMode];
         [event.nameLabel becomeFirstResponder];
     }
@@ -99,19 +99,38 @@
 //    NSLog(@"touch x: %f y: %f", touchPoint.x, touchPoint.y);
 //}
 
--(void)upPressed:(id)sender{
-    
+-(void)upPressed:(id)sender WithEvent:ev{
     UIView *parent = [sender superview];
     if(parent && [parent isKindOfClass:[Event class]]){
         Event *event = (Event *)parent;
-        CGRect frame = CGRectMake(event.frame.origin.x, event.frame.origin.y-_tickHeight, event.frame.size.width, event.frame.size.height+_tickHeight);
+        UITouch *touch = [[ev allTouches] anyObject];
+        CGPoint touchPoint = [touch locationInView:event.upButton];
+        CGRect frame;
+        if(touchPoint.y < 0){
+            frame = CGRectMake(event.frame.origin.x, event.frame.origin.y-_tickHeight, event.frame.size.width, event.frame.size.height+_tickHeight);
+        } else {
+            frame = CGRectMake(event.frame.origin.x, event.frame.origin.y + _tickHeight, event.frame.size.width, event.frame.size.height-_tickHeight);
+        }
         [event changeFrame:frame];
     }
 }
 
--(void)downPressed:(id)sender{
-    NSLog(@"dragged");
+-(void)downPressed:(id)sender WithEvent:ev{
+    UIView *parent = [sender superview];
+    if(parent && [parent isKindOfClass:[Event class]]){
+        Event *event = (Event *)parent;
+        UITouch *touch = [[ev allTouches] anyObject];
+        CGPoint touchPoint = [touch locationInView:event.downButton];
+        CGRect frame;
+        if(touchPoint.y < 0){
+            frame = CGRectMake(event.frame.origin.x, event.frame.origin.y, event.frame.size.width, event.frame.size.height-_tickHeight);
+        } else {
+            frame = CGRectMake(event.frame.origin.x, event.frame.origin.y, event.frame.size.width, event.frame.size.height+_tickHeight);
+        }
+        [event changeFrame:frame];
+    }
 }
+
 
 -(void)tappedEvent:(UITapGestureRecognizer *)tapRecognizer{
     Event *event = (Event *)tapRecognizer.view;
