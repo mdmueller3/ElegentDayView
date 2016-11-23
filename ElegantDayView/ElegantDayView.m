@@ -83,8 +83,34 @@
         [event setupWithFrame:[self getEventFrameFromTick:tick]];
         [_events addObject:event];
         [self addSubview:event];
+        
+        [event.upButton addTarget:self action:@selector(upPressed:) forControlEvents:UIControlEventTouchDragExit];
+//        [event.upButton addTarget:self action:@selector(dragMoving:withEvent:) forControlEvents: UIControlEventTouchDragInside];
+        
+        [event.downButton addTarget:self action:@selector(downPressed:) forControlEvents:UIControlEventTouchDragExit];
+        [event editMode];
         [event.nameLabel becomeFirstResponder];
     }
+}
+
+//-(void)dragMoving:(UIControl *)c withEvent:ev {
+//    UITouch *touch = [[ev allTouches] anyObject];
+//    CGPoint touchPoint = [touch locationInView:self];
+//    NSLog(@"touch x: %f y: %f", touchPoint.x, touchPoint.y);
+//}
+
+-(void)upPressed:(id)sender{
+    
+    UIView *parent = [sender superview];
+    if(parent && [parent isKindOfClass:[Event class]]){
+        Event *event = (Event *)parent;
+        CGRect frame = CGRectMake(event.frame.origin.x, event.frame.origin.y-_tickHeight, event.frame.size.width, event.frame.size.height+_tickHeight);
+        [event changeFrame:frame];
+    }
+}
+
+-(void)downPressed:(id)sender{
+    NSLog(@"dragged");
 }
 
 -(void)tappedEvent:(UITapGestureRecognizer *)tapRecognizer{

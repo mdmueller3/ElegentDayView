@@ -15,6 +15,7 @@
 @property (strong, nonatomic) UIButton *deleteButton;
 @property (strong, nonatomic) UIButton *upButton;
 @property (strong, nonatomic) UIButton *downButton;
+@property (strong, nonatomic) UIView *background;
 @property BOOL editingMode;
 
 // Both out of 96 (24 * 4 -- # of 15 min intervals in 24 hours)
@@ -27,5 +28,6 @@
 -(void)setupWithFrame:(CGRect)frame;
 -(void)editMode;
 -(void)setName:(NSString *)name;
+-(void)changeFrame:(CGRect)frame;
 
 @end
