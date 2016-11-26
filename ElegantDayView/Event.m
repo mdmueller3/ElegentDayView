@@ -79,10 +79,12 @@
 //    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
 //    [self addGestureRecognizer:swipe];
     
-    UIControl *dragTestView = [UIControl new];
-    dragTestView.backgroundColor = [UIColor grayColor];
-    [self addSubview:dragTestView];
-    [dragTestView addTarget:self action:@selector(handleDragEvent:forEvent:) forControlEvents:UIControlEventTouchDragEnter];
+//    UIControl *dragTestView = [UIControl new];
+//    dragTestView.backgroundColor = [UIColor grayColor];
+//    [self addSubview:dragTestView];
+//    [dragTestView addTarget:self action:@selector(handleDragEvent:forEvent:) forControlEvents:UIControlEventTouchDragEnter];
+
+
 }
 
 -(void)changeFrame:(CGRect)frame{
@@ -104,6 +106,10 @@
 
 -(void)textFieldFinished:(id)sender{
     _name = _nameLabel.text;
+    _editingMode = NO;
+    _deleteButton.hidden = YES;
+    _upButton.hidden = YES;
+    _downButton.hidden = YES;
     [_nameLabel resignFirstResponder];
 }
 
@@ -112,10 +118,6 @@
         _deleteButton.hidden = NO;
         _upButton.hidden = NO;
         _downButton.hidden = NO;
-    } else {
-        _deleteButton.hidden = YES;
-        _upButton.hidden = YES;
-        _downButton.hidden = YES;
     }
 }
 

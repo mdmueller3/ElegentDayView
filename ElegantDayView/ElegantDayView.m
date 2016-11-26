@@ -17,6 +17,9 @@
 @property (strong, nonatomic) NSArray *times;
 @property (strong, nonatomic) NSMutableArray *events;
 
+@property CGPoint startPoint;
+@property CGPoint currentPoint;
+
 @property int numTicks;
 @property int tickHeight;
 
@@ -52,8 +55,61 @@
     [self createSampleEvents];
     [self addEvents:_events];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(EDVTap:)];
-    [self addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(EDVTap:)];
+//    [self addGestureRecognizer:tap];
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdAction:)];
+    [self addGestureRecognizer:longPress];
+}
+
+-(void)holdAction:(UILongPressGestureRecognizer *)holdRecognizer{
+    if(holdRecognizer.state == UIGestureRecognizerStateBegan){
+        self.scrollEnabled = NO;
+//        _startPoint = [holdRecognizer locationInView:self];
+        CGPoint touchPoint = [holdRecognizer locationInView:self];
+        int index = touchPoint.y/_tickHeight;
+        Tick *tick;
+        if(index >= 0 && index < [_ticks count]){
+            tick = [_ticks objectAtIndex:index];
+            BOOL lookingForRightTick = YES;
+            while(lookingForRightTick && index>0 && index < [_ticks count]){
+                if(touchPoint.y < tick.frame.origin.y){
+                    index--;
+                    tick = [_ticks objectAtIndex:index];
+                } else if (touchPoint.y > tick.frame.origin.y + tick.frame.origin.y){
+                    index++;
+                    tick = [_ticks objectAtIndex:index];
+                } else {
+                    lookingForRightTick = NO;
+                }
+            }
+        }
+        if(tick){
+            Event *event = [[Event alloc] init];
+            event.startIndex = tick.index;
+            event.endIndex = tick.index + 1;
+            [event setupWithFrame:[self getEventFrameFromTick:tick]];
+            _startPoint.y = tick.frame.origin.y;
+            _startPoint.x = 0;
+            [_events addObject:event];
+            [self addSubview:event];
+        }
+        
+    } else if (holdRecognizer.state == UIGestureRecognizerStateEnded){
+        self.scrollEnabled = YES;
+    }
+    
+    
+    _currentPoint = [holdRecognizer locationInView:self];
+    
+    if(_currentPoint.y - (_startPoint.y + _tickHeight) >= _tickHeight){
+        NSLog(@"move down");
+    }
+    
+    if(_startPoint.y - _currentPoint.y >= _tickHeight){
+        NSLog(@"move up");
+    }
+//    NSLog(@"x: %f y: %f", touchPoint.x, touchPoint.y);
 }
 
 -(void)EDVTap:(UITapGestureRecognizer *)tapRecognizer{
