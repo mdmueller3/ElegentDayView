@@ -19,6 +19,7 @@
 
 @property CGPoint startPoint;
 @property CGPoint currentPoint;
+@property (strong, nonatomic) Event *currentEvent;
 
 @property int numTicks;
 @property int tickHeight;
@@ -85,14 +86,14 @@
             }
         }
         if(tick){
-            Event *event = [[Event alloc] init];
-            event.startIndex = tick.index;
-            event.endIndex = tick.index + 1;
-            [event setupWithFrame:[self getEventFrameFromTick:tick]];
+            _currentEvent = [[Event alloc] init];
+            _currentEvent.startIndex = tick.index;
+            _currentEvent.endIndex = tick.index + 1;
+            [_currentEvent setupWithFrame:[self getEventFrameFromTick:tick]];
             _startPoint.y = tick.frame.origin.y;
             _startPoint.x = 0;
-            [_events addObject:event];
-            [self addSubview:event];
+            [_events addObject:_currentEvent];
+            [self addSubview:_currentEvent];
         }
         
     } else if (holdRecognizer.state == UIGestureRecognizerStateEnded){
@@ -102,12 +103,18 @@
     
     _currentPoint = [holdRecognizer locationInView:self];
     
-    if(_currentPoint.y - (_startPoint.y + _tickHeight) >= _tickHeight){
-        NSLog(@"move down");
-    }
-    
-    if(_startPoint.y - _currentPoint.y >= _tickHeight){
-        NSLog(@"move up");
+    if(_currentEvent){
+        if(_currentPoint.y - (_startPoint.y + _tickHeight) >= (_tickHeight * (_currentEvent.endIndex - _currentEvent.startIndex))){
+            // Move down
+            CGRect frame = CGRectMake(_currentEvent.frame.origin.x, _currentEvent.frame.origin.y, _currentEvent.frame.size.width, _currentEvent.frame.size.height+_tickHeight);
+            _currentEvent.endIndex++;
+            [_currentEvent changeFrame:frame];
+            _currentPoint.y += _tickHeight;
+        }
+        
+        if(_startPoint.y - _currentPoint.y >= _tickHeight){
+            NSLog(@"move up");
+        }
     }
 //    NSLog(@"x: %f y: %f", touchPoint.x, touchPoint.y);
 }
