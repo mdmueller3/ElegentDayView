@@ -13,5 +13,8 @@
 @property BOOL isEditable;
 
 -(void)addEvents:(NSArray*)events;
+-(void)setFont:(UIFont*)font;
+-(void)setPrimaryTimeColor:(UIColor*)color;
+-(void)setSecondaryTimeColor:(UIColor*)color;
 
 @end

@@ -33,4 +33,6 @@ typedef enum{
 
 -(void)createLabelWithTime:(NSString *)timeLabel size:(LabelSize)size;
 
+-(void)setFont:(UIFont *)font;
+
 @end

@@ -52,6 +52,14 @@
     return self;
 }
 
+-(void)setFont:(UIFont *)font{
+    if(_labelSize == LabelSizeSmall){
+        [_label setFont:[UIFont fontWithName:font.fontName size:font.pointSize-2]];
+    } else {
+        [_label setFont:font];
+    }
+}
+
 -(void)createLabelWithTime:(NSString *)timeLabel size:(LabelSize)size{
     _label = [[UILabel alloc] initWithFrame:CGRectMake(0, -13, 70, 20)];
     _label.text = timeLabel;

@@ -23,6 +23,7 @@
     _dayView = [[ElegantDayView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:_dayView];
     _dayView.isEditable = YES;
+    [_dayView setFont:[UIFont fontWithName:@"Helvetica" size:12]];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

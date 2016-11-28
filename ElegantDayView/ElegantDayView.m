@@ -21,8 +21,11 @@
 @property CGPoint currentPoint;
 @property (strong, nonatomic) Event *currentEvent;
 
+@property UIFont *labelFont;
+
 @property int numTicks;
 @property int tickHeight;
+@property UIFont *font;
 
 @end
 
@@ -41,7 +44,6 @@
 }
 
 -(void)setup{
-    
     _numTicks = 96;
     _tickHeight = 35;
     self.contentSize = CGSizeMake(self.frame.size.width, 1000);
@@ -61,6 +63,18 @@
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdAction:)];
     [self addGestureRecognizer:longPress];
+}
+
+-(void)setFont:(UIFont *)font{
+    for(Tick *tick in _ticks){
+        if(tick.label){
+            [tick setFont:font];
+        }
+    }
+    for(Event *event in _events){
+        [event.nameLabel setFont:font];
+    }
+    _font = font;
 }
 
 -(void)holdAction:(UILongPressGestureRecognizer *)holdRecognizer{
@@ -92,7 +106,7 @@
         }
         if(tick){
             _currentEvent = [[Event alloc] init];
-            _currentEvent.color = [UIColor redColor];
+            [_currentEvent setFont:_font];
             _currentEvent.startIndex = tick.index;
             _currentEvent.endIndex = tick.index + 1;
             [_currentEvent setupWithFrame:[self getEventFrameFromTick:tick]];

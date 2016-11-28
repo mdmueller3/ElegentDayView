@@ -38,6 +38,11 @@
     self.layer.borderColor = _color.CGColor;
 }
 
+-(void)setFont:(UIFont *)font{
+    _nameLabel.font = font;
+    _font = font;
+}
+
 -(void)setupWithFrame:(CGRect)frame{
     self.frame = frame;
     _background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
@@ -52,12 +57,16 @@
     _background.alpha = 0.4;
     [self addSubview:_background];
     
+    if(_font == nil){
+        _font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+    }
+    
     CGFloat tickHeight = self.frame.size.height/(_endIndex-_startIndex);
     
     _nameLabel = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, tickHeight)];
     _nameLabel.textAlignment = NSTextAlignmentCenter;
     _nameLabel.text = _name;
-    _nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+    _nameLabel.font = _font;
     _nameLabel.textColor = [UIColor whiteColor];
     [_nameLabel setReturnKeyType:UIReturnKeyDone];
     [_nameLabel addTarget:self
