@@ -112,15 +112,25 @@
                 _currentEvent.endIndex++;
                 [_currentEvent changeFrame:frame];
                 _currentPoint.y += _tickHeight;
-            } else if (_currentPoint.y - (_startPoint.y + _tickHeight) <= (_tickHeight * (_currentEvent.endIndex - _currentEvent.startIndex) - _tickHeight)){
+            } else if (_currentPoint.y - (_startPoint.y + _tickHeight) <= (_tickHeight * (_currentEvent.endIndex - _currentEvent.startIndex) - _tickHeight) && _currentEvent.startIndex != _currentEvent.endIndex - 1){
                 CGRect frame = CGRectMake(_currentEvent.frame.origin.x, _currentEvent.frame.origin.y, _currentEvent.frame.size.width, _currentEvent.frame.size.height-_tickHeight);
                 _currentEvent.endIndex--;
                 [_currentEvent changeFrame:frame];
                 _currentPoint.y -= _tickHeight;
             }
         } else if (_currentPoint.y < _startPoint.y){
-            if(_startPoint.y - _currentPoint.y >= (_tickHeight * (_currentEvent.startIndex - _currentEvent.endIndex))){
-                
+            if(_startPoint.y - _currentPoint.y >= (_tickHeight * (_currentEvent.endIndex - _currentEvent.startIndex))){
+                // Move up
+                CGRect frame = CGRectMake(_currentEvent.frame.origin.x, _currentEvent.frame.origin.y - _tickHeight, _currentEvent.frame.size.width, _currentEvent.frame.size.height+_tickHeight);
+                _currentEvent.startIndex--;
+                [_currentEvent changeFrame:frame];
+                _currentPoint.y -= _tickHeight;
+            } else if (_startPoint.y - _currentPoint.y <= (_tickHeight * (_currentEvent.endIndex - _currentEvent.startIndex) - _tickHeight) && _currentEvent.startIndex != _currentEvent.endIndex - 1){
+                // Move down from up position
+                CGRect frame = CGRectMake(_currentEvent.frame.origin.x, _currentEvent.frame.origin.y + _tickHeight, _currentEvent.frame.size.width, _currentEvent.frame.size.height - _tickHeight);
+                _currentEvent.startIndex++;
+                [_currentEvent changeFrame:frame];
+                _currentPoint.y += _tickHeight;
             }
         }
 //        if(_startPoint.y - _currentPoint.y >= (_tickHeight * (_currentEvent.startIndex - _currentEvent.endIndex))){
