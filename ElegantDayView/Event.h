@@ -13,8 +13,6 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) UITextField *nameLabel;
 @property (strong, nonatomic) UIButton *deleteButton;
-@property (strong, nonatomic) UIButton *upButton;
-@property (strong, nonatomic) UIButton *downButton;
 @property (strong, nonatomic) UIView *background;
 @property BOOL editingMode;
 
@@ -26,7 +24,8 @@
 
 -(instancetype)initWithName:(NSString *)name;
 -(void)setupWithFrame:(CGRect)frame;
--(void)editMode;
+-(void)startEditing;
+-(void)endEditing;
 -(void)setName:(NSString *)name;
 -(void)setColor:(UIColor *)color;
 -(void)changeFrame:(CGRect)frame;

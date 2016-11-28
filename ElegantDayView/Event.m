@@ -84,7 +84,7 @@
 }
 
 -(void)handleTap:(UITapGestureRecognizer*)tapGesture{
-    [self editMode];
+    [self startEditing];
 }
 
 -(void)changeFrame:(CGRect)frame{
@@ -103,20 +103,21 @@
 
 -(void)textFieldFinished:(id)sender{
     _name = _nameLabel.text;
-    _editingMode = NO;
-    _deleteButton.hidden = YES;
-    _upButton.hidden = YES;
-    _downButton.hidden = YES;
-    [_nameLabel resignFirstResponder];
+    [self endEditing];
 }
 
--(void)editMode{
+-(void)startEditing{
+    _editingMode = YES;
     if(_deleteButton.hidden){
         _deleteButton.hidden = NO;
-        _upButton.hidden = NO;
-        _downButton.hidden = NO;
     }
     [_nameLabel becomeFirstResponder];
+}
+
+-(void)endEditing{
+    _editingMode = NO;
+    _deleteButton.hidden = YES;
+    [_nameLabel resignFirstResponder];
 }
 
 -(void)delete:(id)sender{
