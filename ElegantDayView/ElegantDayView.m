@@ -53,7 +53,7 @@
     
     _events = [[NSMutableArray alloc] init];
     
-    [self createSampleEvents];
+//    [self createSampleEvents];
     [self addEvents:_events];
     
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(EDVTap:)];
@@ -64,6 +64,9 @@
 }
 
 -(void)holdAction:(UILongPressGestureRecognizer *)holdRecognizer{
+    for(Event *event in _events){
+        
+    }
     if(holdRecognizer.state == UIGestureRecognizerStateBegan){
         self.scrollEnabled = NO;
 //        _startPoint = [holdRecognizer locationInView:self];
@@ -87,15 +90,18 @@
         }
         if(tick){
             _currentEvent = [[Event alloc] init];
+            _currentEvent.color = [UIColor redColor];
             _currentEvent.startIndex = tick.index;
             _currentEvent.endIndex = tick.index + 1;
             [_currentEvent setupWithFrame:[self getEventFrameFromTick:tick]];
             _startPoint.y = tick.frame.origin.y;
             _startPoint.x = 0;
-            [_events addObject:_currentEvent];
             [self addSubview:_currentEvent];
         }
     } else if (holdRecognizer.state == UIGestureRecognizerStateEnded){
+        // Event created
+        [_events addObject:_currentEvent];
+        [self checkForCollisionsWithEvent:_currentEvent];
         self.scrollEnabled = YES;
         [_currentEvent editMode];
     }
@@ -138,6 +144,39 @@
     }
 }
 
+-(void)checkForCollisionsWithEvent:(Event *)addedEvent{
+    NSMutableArray *removableEvents = [[NSMutableArray alloc] init];
+    for(Event *event in _events){
+        if([addedEvent isEqual:event]){
+            continue;
+        }
+        
+        if(addedEvent.startIndex < event.startIndex && (addedEvent.endIndex > event.startIndex && addedEvent.endIndex < event.endIndex)){
+            // Collision type #1: New event starts above the event but ends in the middle of it
+            NSLog(@"collision #1");
+            int difference = addedEvent.endIndex - event.startIndex;
+            event.startIndex += difference;
+            [event changeFrame:CGRectMake(event.frame.origin.x, event.frame.origin.y + (_tickHeight * difference), event.frame.size.width, event.frame.size.height - (_tickHeight * difference))];
+        } else if ((addedEvent.startIndex > event.startIndex && addedEvent.startIndex < event.endIndex) && addedEvent.endIndex > event.endIndex){
+            // Collision type #2: New event starts in middle of event but ends below it
+            NSLog(@"collision #2");
+            int difference = event.endIndex - addedEvent.startIndex;
+            event.endIndex -= difference;
+            [event changeFrame:CGRectMake(event.frame.origin.x, event.frame.origin.y, event.frame.size.width, event.frame.size.height - (_tickHeight * difference))];
+        } else if (addedEvent.startIndex < event.startIndex && addedEvent.endIndex > event.endIndex){
+            NSLog(@"collision #3");
+            [removableEvents addObject:event];
+//            [_events removeObject:event];
+//            [event removeFromSuperview];
+        }
+    }
+    
+    for(Event *event in removableEvents){
+        [_events removeObject:event];
+        [event removeFromSuperview];
+    }
+}
+
 -(void)EDVTap:(UITapGestureRecognizer *)tapRecognizer{
     CGPoint touchPoint = [tapRecognizer locationInView:self];
     
@@ -163,7 +202,6 @@
         event.startIndex = tick.index;
         event.endIndex = tick.index + 1;
         [event setupWithFrame:[self getEventFrameFromTick:tick]];
-        [_events addObject:event];
         [self addSubview:event];
         
         [event.upButton addTarget:self action:@selector(upPressed:WithEvent:) forControlEvents:UIControlEventTouchDragExit];

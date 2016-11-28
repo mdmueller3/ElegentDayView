@@ -29,15 +29,24 @@
 
 -(void)setName:(NSString *)name{
     _name = name;
+    _nameLabel.text = name;
+}
+
+-(void)setColor:(UIColor *)color{
+    _color = color;
+    _background.backgroundColor = _color;
+    self.layer.borderColor = _color.CGColor;
 }
 
 -(void)setupWithFrame:(CGRect)frame{
     self.frame = frame;
     _background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     
-    
-    _color = [UIColor colorWithRed:0.40 green:0.62 blue:0.86 alpha:1.0];
+    if(_color == nil){
+        _color = [UIColor colorWithRed:0.40 green:0.62 blue:0.86 alpha:1.0];
+    }
     _background.backgroundColor = _color;
+    _background.layer.cornerRadius = 5.0;
     self.layer.borderColor = _color.CGColor;
     
     _background.alpha = 0.4;
@@ -81,9 +90,6 @@
 -(void)changeFrame:(CGRect)frame{
     self.frame = frame;
     _background.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-//    _upButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 10, -10, 20, 20)];
-    _upButton.frame = CGRectMake(frame.size.width/2 - 10, -10, 20, 20);
-    _downButton.frame = CGRectMake(frame.size.width/2 - 10, frame.size.height-10, 20, 20);
 }
 
 - (void)handleDragEvent:(id)sender forEvent:(UIEvent*)event {

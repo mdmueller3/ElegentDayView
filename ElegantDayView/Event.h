@@ -28,6 +28,7 @@
 -(void)setupWithFrame:(CGRect)frame;
 -(void)editMode;
 -(void)setName:(NSString *)name;
+-(void)setColor:(UIColor *)color;
 -(void)changeFrame:(CGRect)frame;
 
 @end
