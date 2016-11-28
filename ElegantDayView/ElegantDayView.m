@@ -97,50 +97,45 @@
         }
     } else if (holdRecognizer.state == UIGestureRecognizerStateEnded){
         self.scrollEnabled = YES;
+        [_currentEvent editMode];
     }
     
     
     _currentPoint = [holdRecognizer locationInView:self];
     
     if(_currentEvent){
-        
         if(_currentPoint.y > _startPoint.y){
+            // MOVEMENT DOWN
             if((_currentPoint.y - (_startPoint.y + _tickHeight)) >= (_tickHeight * (_currentEvent.endIndex - _currentEvent.startIndex))){
-                // Move down
+                // Making event bigger
                 CGRect frame = CGRectMake(_currentEvent.frame.origin.x, _currentEvent.frame.origin.y, _currentEvent.frame.size.width, _currentEvent.frame.size.height+_tickHeight);
-                
                 _currentEvent.endIndex++;
                 [_currentEvent changeFrame:frame];
                 _currentPoint.y += _tickHeight;
             } else if (_currentPoint.y - (_startPoint.y + _tickHeight) <= (_tickHeight * (_currentEvent.endIndex - _currentEvent.startIndex) - _tickHeight) && _currentEvent.startIndex != _currentEvent.endIndex - 1){
+                // Making event smaller
                 CGRect frame = CGRectMake(_currentEvent.frame.origin.x, _currentEvent.frame.origin.y, _currentEvent.frame.size.width, _currentEvent.frame.size.height-_tickHeight);
                 _currentEvent.endIndex--;
                 [_currentEvent changeFrame:frame];
                 _currentPoint.y -= _tickHeight;
             }
         } else if (_currentPoint.y < _startPoint.y){
+            // MOVEMENT UP
             if(_startPoint.y - _currentPoint.y >= (_tickHeight * (_currentEvent.endIndex - _currentEvent.startIndex))){
-                // Move up
+                // Making event bigger
                 CGRect frame = CGRectMake(_currentEvent.frame.origin.x, _currentEvent.frame.origin.y - _tickHeight, _currentEvent.frame.size.width, _currentEvent.frame.size.height+_tickHeight);
                 _currentEvent.startIndex--;
                 [_currentEvent changeFrame:frame];
                 _currentPoint.y -= _tickHeight;
             } else if (_startPoint.y - _currentPoint.y <= (_tickHeight * (_currentEvent.endIndex - _currentEvent.startIndex) - _tickHeight) && _currentEvent.startIndex != _currentEvent.endIndex - 1){
-                // Move down from up position
+                // Making event smaller
                 CGRect frame = CGRectMake(_currentEvent.frame.origin.x, _currentEvent.frame.origin.y + _tickHeight, _currentEvent.frame.size.width, _currentEvent.frame.size.height - _tickHeight);
                 _currentEvent.startIndex++;
                 [_currentEvent changeFrame:frame];
                 _currentPoint.y += _tickHeight;
             }
         }
-//        if(_startPoint.y - _currentPoint.y >= (_tickHeight * (_currentEvent.startIndex - _currentEvent.endIndex))){
-//            CGRect frame = CGRectMake(_currentEvent.frame.origin.x, _currentEvent.frame.origin.y-_tickHeight, _currentEvent.frame.size.width, _currentEvent.frame.size.height+_tickHeight);
-//            _currentEvent.startIndex--;
-//            [_currentEvent changeFrame:frame];
-//            _currentPoint.y -= _tickHeight;
-//        }
     }
-//    NSLog(@"x: %f y: %f", touchPoint.x, touchPoint.y);
 }
 
 -(void)EDVTap:(UITapGestureRecognizer *)tapRecognizer{

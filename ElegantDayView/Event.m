@@ -56,25 +56,14 @@
              forControlEvents:UIControlEventEditingDidEndOnExit];
     [_background addSubview:_nameLabel];
     
-    _deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(5,tickHeight/2-10,20,20)];
+    _deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width + 5,tickHeight/2-10,20,20)];
     [_deleteButton setImage:[UIImage imageNamed:@"deleteButton"] forState:UIControlStateNormal];
     [_deleteButton addTarget:self action:@selector(delete:) forControlEvents:UIControlEventTouchUpInside];
     [self insertSubview:_deleteButton aboveSubview:_background];
     _deleteButton.hidden = YES;
     
-    _upButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 10, -10, 20, 20)];
-    [_upButton setTitle:@"" forState:UIControlStateNormal];
-    _upButton.backgroundColor = _color;
-    _upButton.layer.cornerRadius = 10;
-    [self insertSubview:_upButton aboveSubview:_background];
-    _upButton.hidden = YES;
-    
-    _downButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 10, self.frame.size.height-10, 20, 20)];
-    [_downButton setTitle:@"" forState:UIControlStateNormal];
-    _downButton.backgroundColor = _color;
-    _downButton.layer.cornerRadius = 10;
-    [self insertSubview:_downButton aboveSubview:_background];
-    _downButton.hidden = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [self addGestureRecognizer:tap];
     
 //    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
 //    [self addGestureRecognizer:swipe];
@@ -83,8 +72,10 @@
 //    dragTestView.backgroundColor = [UIColor grayColor];
 //    [self addSubview:dragTestView];
 //    [dragTestView addTarget:self action:@selector(handleDragEvent:forEvent:) forControlEvents:UIControlEventTouchDragEnter];
+}
 
-
+-(void)handleTap:(UITapGestureRecognizer*)tapGesture{
+    [self editMode];
 }
 
 -(void)changeFrame:(CGRect)frame{
@@ -119,6 +110,7 @@
         _upButton.hidden = NO;
         _downButton.hidden = NO;
     }
+    [_nameLabel becomeFirstResponder];
 }
 
 -(void)delete:(id)sender{
