@@ -174,19 +174,20 @@
         }
     }
     
+    // Manually scroll while creating an event
     CGPoint pointInView = [holdRecognizer locationInView:self.superview];
-    if(pointInView.y > self.superview.frame.size.height - 100){
-        [self setContentOffset:CGPointMake(0, _currentPoint.y - self.superview.frame.size.height/2) animated:YES];
-    } else if (pointInView.y < 100){
-//        [self setContentOffset:CGPointMake(0, 100) animated:YES];
-        [self setContentOffset:CGPointMake(0, _currentPoint.y - self.superview.frame.size.height/2) animated:YES];
+    if(_currentPoint.y - self.superview.frame.size.height/2 > 0 && _currentPoint.y + self.superview.frame.size.height/2 - 20 < self.contentSize.height){
+        // Check if not out of bounds
+        if(pointInView.y > self.superview.frame.size.height - 100){
+            [self setContentOffset:CGPointMake(0, _currentPoint.y - self.superview.frame.size.height/2) animated:YES];
+        } else if (pointInView.y < 100){
+            [self setContentOffset:CGPointMake(0, _currentPoint.y - self.superview.frame.size.height/2) animated:YES];
+        }
     }
 }
 
 -(void)checkForSameNames:(Event *)addedEvent{
-    NSLog(@"added name: %@", addedEvent.name);
     for(Event *event in _events){
-        NSLog(@"event name: %@", event.name);
         if([event.name isEqualToString:addedEvent.name]){
             [addedEvent setColor:event.color];
         }
