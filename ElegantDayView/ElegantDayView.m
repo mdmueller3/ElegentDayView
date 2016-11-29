@@ -25,7 +25,7 @@
 
 @property int numTicks;
 @property int tickHeight;
-@property UIFont *font;
+@property (strong, nonatomic) UIFont *font;
 
 @end
 
@@ -77,16 +77,34 @@
     _font = font;
 }
 
--(void)holdAction:(UILongPressGestureRecognizer *)holdRecognizer{
+-(void)stopAllEditing{
     for(Event *event in _events){
         if(event.editingMode){
             [event endEditing];
         }
     }
+}
+
+-(void)holdAction:(UILongPressGestureRecognizer *)holdRecognizer{
+    if(!_isEditable){
+        return;
+    }
+    
+    [self stopAllEditing];
+
     if(holdRecognizer.state == UIGestureRecognizerStateBegan){
         self.scrollEnabled = NO;
 //        _startPoint = [holdRecognizer locationInView:self];
         CGPoint touchPoint = [holdRecognizer locationInView:self];
+        
+        // Prevents event from being created inside another event by long press on event
+        // Pretty sure creating an event like this should be possible, so get rid of this later
+        for(Event *event in _events){
+            if(CGRectContainsPoint(event.frame, touchPoint)){
+                return;
+            }
+        }
+        
         int index = touchPoint.y/_tickHeight;
         Tick *tick;
         if(index >= 0 && index < [_ticks count]){
@@ -169,21 +187,16 @@
         
         if(addedEvent.startIndex < event.startIndex && (addedEvent.endIndex > event.startIndex && addedEvent.endIndex < event.endIndex)){
             // Collision type #1: New event starts above the event but ends in the middle of it
-            NSLog(@"collision #1");
             int difference = addedEvent.endIndex - event.startIndex;
             event.startIndex += difference;
             [event changeFrame:CGRectMake(event.frame.origin.x, event.frame.origin.y + (_tickHeight * difference), event.frame.size.width, event.frame.size.height - (_tickHeight * difference))];
         } else if ((addedEvent.startIndex > event.startIndex && addedEvent.startIndex < event.endIndex) && addedEvent.endIndex > event.endIndex){
             // Collision type #2: New event starts in middle of event but ends below it
-            NSLog(@"collision #2");
             int difference = event.endIndex - addedEvent.startIndex;
             event.endIndex -= difference;
             [event changeFrame:CGRectMake(event.frame.origin.x, event.frame.origin.y, event.frame.size.width, event.frame.size.height - (_tickHeight * difference))];
         } else if (addedEvent.startIndex < event.startIndex && addedEvent.endIndex > event.endIndex){
-            NSLog(@"collision #3");
             [removableEvents addObject:event];
-//            [_events removeObject:event];
-//            [event removeFromSuperview];
         }
     }
     
@@ -193,46 +206,11 @@
     }
 }
 
--(void)EDVTap:(UITapGestureRecognizer *)tapRecognizer{
-    CGPoint touchPoint = [tapRecognizer locationInView:self];
-    
-    int index = touchPoint.y/_tickHeight;
-    Tick *tick;
-    if(index >= 0 && index < [_ticks count]){
-        tick = [_ticks objectAtIndex:index];
-        BOOL lookingForRightTick = YES;
-        while(lookingForRightTick && (index>=0 && index < [_ticks count])){
-            if(touchPoint.y < tick.frame.origin.y){
-                index--;
-                tick = [_ticks objectAtIndex:index];
-            } else if (touchPoint.y > tick.frame.origin.y + tick.frame.origin.y){
-                index++;
-                tick = [_ticks objectAtIndex:index];
-            } else {
-                lookingForRightTick = NO;
-            }
-        }
-    }
-    if(tick){
-        Event *event = [[Event alloc] init];
-        event.startIndex = tick.index;
-        event.endIndex = tick.index + 1;
-        [event setupWithFrame:[self getEventFrameFromTick:tick]];
-        [self addSubview:event];
-        
-        [event startEditing];
-        [event.nameLabel becomeFirstResponder];
-    }
-}
-
 -(void)tappedEvent:(UITapGestureRecognizer *)tapRecognizer{
     Event *event = (Event *)tapRecognizer.view;
+    [self stopAllEditing];
     [event startEditing];
     NSLog(@"%@", event.name);
-}
-
--(void)longPress:(UILongPressGestureRecognizer *)longPressRecognizer{
-    NSLog(@"hello");
 }
 
 -(void)createTickTimes{

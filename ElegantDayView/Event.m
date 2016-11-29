@@ -130,7 +130,16 @@
 }
 
 -(void)delete:(id)sender{
+    NSLog(@"delete pressed");
     [self removeFromSuperview];
+}
+
+-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+    if(CGRectContainsPoint(self.bounds, point) || CGRectContainsPoint(_deleteButton.frame, point)){
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

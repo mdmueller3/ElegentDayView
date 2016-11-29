@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		73DEC8C61DE2494200EA0144 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DEC8C51DE2494200EA0144 /* main.m */; };
 		73DEC8C91DE2494200EA0144 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DEC8C81DE2494200EA0144 /* AppDelegate.m */; };
-		73DEC8CC1DE2494200EA0144 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DEC8CB1DE2494200EA0144 /* ViewController.m */; };
+		73DEC8CC1DE2494200EA0144 /* EditingDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DEC8CB1DE2494200EA0144 /* EditingDemo.m */; };
 		73DEC8CF1DE2494200EA0144 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8CD1DE2494200EA0144 /* Main.storyboard */; };
 		73DEC8D41DE2494200EA0144 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8D31DE2494200EA0144 /* Assets.xcassets */; };
 		73DEC8D71DE2494200EA0144 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73DEC8D51DE2494200EA0144 /* LaunchScreen.storyboard */; };
@@ -35,8 +35,8 @@
 		73DEC8C51DE2494200EA0144 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		73DEC8C71DE2494200EA0144 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		73DEC8C81DE2494200EA0144 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		73DEC8CA1DE2494200EA0144 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		73DEC8CB1DE2494200EA0144 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		73DEC8CA1DE2494200EA0144 /* EditingDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditingDemo.h; sourceTree = "<group>"; };
+		73DEC8CB1DE2494200EA0144 /* EditingDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditingDemo.m; sourceTree = "<group>"; };
 		73DEC8CE1DE2494200EA0144 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		73DEC8D31DE2494200EA0144 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73DEC8D61DE2494200EA0144 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -72,6 +72,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7394DEA71DECFD810065A0BF /* ElegantDayView */ = {
+			isa = PBXGroup;
+			children = (
+				73DEC8DE1DE2497C00EA0144 /* ElegantDayView.h */,
+				73DEC8DF1DE2497D00EA0144 /* ElegantDayView.m */,
+				73DEC8FE1DE29E8700EA0144 /* Event.h */,
+				73DEC8FF1DE29E8700EA0144 /* Event.m */,
+				73DEC8E11DE24CF700EA0144 /* Tick.h */,
+				73DEC8E21DE24CF700EA0144 /* Tick.m */,
+			);
+			name = ElegantDayView;
+			sourceTree = "<group>";
+		};
 		73DEC8B81DE2494200EA0144 = {
 			isa = PBXGroup;
 			children = (
@@ -94,15 +107,10 @@
 				73DEC8E51DE29B6500EA0144 /* Resources */,
 				73DEC8C71DE2494200EA0144 /* AppDelegate.h */,
 				73DEC8C81DE2494200EA0144 /* AppDelegate.m */,
-				73DEC8CA1DE2494200EA0144 /* ViewController.h */,
-				73DEC8CB1DE2494200EA0144 /* ViewController.m */,
+				73DEC8CA1DE2494200EA0144 /* EditingDemo.h */,
+				73DEC8CB1DE2494200EA0144 /* EditingDemo.m */,
 				73DEC8CD1DE2494200EA0144 /* Main.storyboard */,
-				73DEC8DE1DE2497C00EA0144 /* ElegantDayView.h */,
-				73DEC8DF1DE2497D00EA0144 /* ElegantDayView.m */,
-				73DEC8FE1DE29E8700EA0144 /* Event.h */,
-				73DEC8FF1DE29E8700EA0144 /* Event.m */,
-				73DEC8E11DE24CF700EA0144 /* Tick.h */,
-				73DEC8E21DE24CF700EA0144 /* Tick.m */,
+				7394DEA71DECFD810065A0BF /* ElegantDayView */,
 				73DEC8D31DE2494200EA0144 /* Assets.xcassets */,
 				73DEC8D51DE2494200EA0144 /* LaunchScreen.storyboard */,
 				73DEC8D81DE2494200EA0144 /* Info.plist */,
@@ -222,7 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73DEC8CC1DE2494200EA0144 /* ViewController.m in Sources */,
+				73DEC8CC1DE2494200EA0144 /* EditingDemo.m in Sources */,
 				73DEC8C91DE2494200EA0144 /* AppDelegate.m in Sources */,
 				73DEC8C61DE2494200EA0144 /* main.m in Sources */,
 				73DEC8E31DE24CF700EA0144 /* Tick.m in Sources */,

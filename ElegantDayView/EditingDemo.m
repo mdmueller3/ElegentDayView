@@ -6,16 +6,16 @@
 //  Copyright © 2016 Michael Mueller. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "EditingDemo.h"
 #import "ElegantDayView.h"
 
-@interface ViewController ()
+@interface EditingDemo ()
 
 @property (strong, nonatomic) ElegantDayView *dayView;
 
 @end
 
-@implementation ViewController
+@implementation EditingDemo
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,7 +23,7 @@
     _dayView = [[ElegantDayView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:_dayView];
     _dayView.isEditable = YES;
-    [_dayView setFont:[UIFont fontWithName:@"Helvetica" size:12]];
+//    [_dayView setFont:[UIFont fontWithName:@"Helvetica" size:12]];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
