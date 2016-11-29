@@ -37,5 +37,6 @@
 
 -(void)addEvents:(NSArray*)events;
 -(void)setFont:(UIFont*)font;
+-(void)goToTime:(NSString *)time;
 
 @end

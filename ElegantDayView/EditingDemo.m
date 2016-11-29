@@ -24,6 +24,7 @@
     [self.view addSubview:_dayView];
     _dayView.isEditable = YES;
     _dayView.randomEventColors = YES;
+    [_dayView goToTime:@"12:30 pm"];
 //    [_dayView setFont:[UIFont fontWithName:@"Helvetica" size:12]];
     // Do any additional setup after loading the view, typically from a nib.
 }

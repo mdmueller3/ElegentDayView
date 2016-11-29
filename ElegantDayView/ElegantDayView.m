@@ -284,6 +284,14 @@
     return CGRectMake((tick.lineStart.x+45) + 25, tick.frame.origin.y, (tick.lineEnd.x - tick.lineStart.x) - 50, _tickHeight);
 }
 
+-(void)goToTime:(NSString *)time{
+    for(Tick *tick in _ticks){
+        if([tick.timeLabel isEqualToString:time]){
+            self.contentOffset = CGPointMake(0, tick.frame.origin.y);
+        }
+    }
+}
+
 -(void)addEvents:(NSArray*)events{
     for(Event *event in events){
         
