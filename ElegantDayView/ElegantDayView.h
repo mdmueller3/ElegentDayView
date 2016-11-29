@@ -7,10 +7,33 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Event.h"
 
 @interface ElegantDayView : UIScrollView
 
 @property BOOL isEditable;
+@property BOOL randomEventColors;
+
+@property (strong, nonatomic) NSMutableArray *ticks;
+@property (strong, nonatomic) NSArray *tickTimes;
+@property (strong, nonatomic) NSArray *times;
+@property (strong, nonatomic) NSMutableArray *events;
+
+@property int lastRandom;
+
+// Used randomly if randomEventColors enabled
+@property (strong, nonatomic) NSArray *eventColors;
+
+@property CGPoint startPoint;
+@property CGPoint currentPoint;
+@property (strong, nonatomic) Event *currentEvent;
+
+@property UIFont *labelFont;
+
+@property int numTicks;
+@property int tickHeight;
+@property (strong, nonatomic) UIFont *font;
+
 
 -(void)addEvents:(NSArray*)events;
 -(void)setFont:(UIFont*)font;

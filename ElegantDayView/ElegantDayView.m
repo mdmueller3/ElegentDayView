@@ -10,27 +10,6 @@
 #import "Tick.h"
 #import "Event.h"
 
-@interface ElegantDayView()
-
-@property (strong, nonatomic) NSMutableArray *ticks;
-@property (strong, nonatomic) NSArray *tickTimes;
-@property (strong, nonatomic) NSArray *times;
-@property (strong, nonatomic) NSMutableArray *events;
-
-@property CGPoint startPoint;
-@property CGPoint currentPoint;
-@property (strong, nonatomic) Event *currentEvent;
-
-@property UIFont *labelFont;
-
-@property int numTicks;
-@property int tickHeight;
-@property (strong, nonatomic) UIFont *font;
-
-@end
-
-
-
 @implementation ElegantDayView
 
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -49,6 +28,15 @@
     self.contentSize = CGSizeMake(self.frame.size.width, 1000);
     self.layer.borderColor = [UIColor colorWithRed:0.82 green:0.82 blue:0.82 alpha:1.0].CGColor;
     self.layer.borderWidth = 1.0;
+    
+    _eventColors = @[
+                           [UIColor colorWithRed:0.40 green:0.62 blue:0.86 alpha:1.0],
+                           [UIColor colorWithRed:0.91 green:0.48 blue:0.48 alpha:1.0],
+                           [UIColor colorWithRed:0.93 green:0.72 blue:0.40 alpha:1.0],
+                           [UIColor colorWithRed:0.54 green:0.91 blue:0.48 alpha:1.0],
+                           [UIColor colorWithRed:0.48 green:0.82 blue:0.91 alpha:1.0],
+                           [UIColor colorWithRed:0.55 green:0.58 blue:0.94 alpha:1.0]
+                           ];
     
     [self createTickTimes];
     [self createTicks];
@@ -124,6 +112,15 @@
         }
         if(tick){
             _currentEvent = [[Event alloc] init];
+            if(_randomEventColors){
+                int r = arc4random_uniform((int)[_eventColors count]);
+                while(r == _lastRandom){
+                    r = arc4random_uniform((int)[_eventColors count]);
+                }
+                _lastRandom = r;
+                
+                [_currentEvent setColor:[_eventColors objectAtIndex:r]];
+            }
             [_currentEvent setFont:_font];
             _currentEvent.startIndex = tick.index;
             _currentEvent.endIndex = tick.index + 1;
@@ -281,21 +278,6 @@
 
 -(CGFloat)getHeightFromStartIndex:(int)start EndIndex:(int)end{
     return (end-start)*_tickHeight;
-}
-
--(void)createSampleEvents{
-    Event *event1 = [[Event alloc] init];
-    [event1 setName:@"Work"];
-    event1.startIndex = 5;
-    event1.endIndex = 10;
-    [_events addObject:event1];
-    
-    Event *event2 = [[Event alloc] init];
-    [event2 setName:@"Coffee"];
-    event2.startIndex = 10;
-    event2.endIndex = 30;
-    event2.color = [UIColor colorWithRed:0.91 green:0.45 blue:0.45 alpha:1.0];
-    [_events addObject:event2];
 }
 
 -(CGRect)getEventFrameFromTick:(Tick*)tick{
