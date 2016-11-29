@@ -128,6 +128,7 @@
             _startPoint.y = tick.frame.origin.y;
             _startPoint.x = 0;
             [self addSubview:_currentEvent];
+            [self setContentOffset:CGPointMake(0,_currentEvent.frame.origin.y - self.frame.size.height/2 + 50) animated:YES];
         }
     } else if (holdRecognizer.state == UIGestureRecognizerStateEnded){
         // Event created
