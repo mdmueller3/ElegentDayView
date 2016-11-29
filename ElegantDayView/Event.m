@@ -84,14 +84,6 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self addGestureRecognizer:tap];
-    
-//    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
-//    [self addGestureRecognizer:swipe];
-    
-//    UIControl *dragTestView = [UIControl new];
-//    dragTestView.backgroundColor = [UIColor grayColor];
-//    [self addSubview:dragTestView];
-//    [dragTestView addTarget:self action:@selector(handleDragEvent:forEvent:) forControlEvents:UIControlEventTouchDragEnter];
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -125,8 +117,10 @@
     _deleteButton.hidden = YES;
     [_nameLabel resignFirstResponder];
     
+    // Check if superview is parent (it always will be, just being safe :) )
     if([self.superview isKindOfClass:[ElegantDayView class]]){
         ElegantDayView *parent = (ElegantDayView *) self.superview;
+        // Check for same names in all of events
         [parent checkForSameNames:self];
     }
 }
