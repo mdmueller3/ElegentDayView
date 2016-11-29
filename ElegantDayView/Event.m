@@ -68,6 +68,7 @@
     _nameLabel.textAlignment = NSTextAlignmentCenter;
     _nameLabel.text = _name;
     _nameLabel.font = _font;
+    _nameLabel.delegate = self;
     _nameLabel.textColor = [UIColor whiteColor];
     [_nameLabel setReturnKeyType:UIReturnKeyDone];
     [_nameLabel addTarget:self
@@ -91,6 +92,10 @@
 //    dragTestView.backgroundColor = [UIColor grayColor];
 //    [self addSubview:dragTestView];
 //    [dragTestView addTarget:self action:@selector(handleDragEvent:forEvent:) forControlEvents:UIControlEventTouchDragEnter];
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    [self startEditing];
 }
 
 -(void)handleTap:(UITapGestureRecognizer*)tapGesture{
@@ -127,7 +132,6 @@
 }
 
 -(void)delete:(id)sender{
-    NSLog(@"delete pressed");
     [self removeFromSuperview];
 }
 

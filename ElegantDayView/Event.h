@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Event : UIView
+@interface Event : UIView <UITextFieldDelegate>
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) UITextField *nameLabel;
