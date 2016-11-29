@@ -2,7 +2,7 @@
 
 Objective-C library for mimicking the iOS Calendar app's day view
 
-<img src = "https://github.com/mdmueller3/ElegentDayView/blob/master/EGV.PNG" height = 500px>
+<img src = "https://github.com/mdmueller3/ElegentDayView/blob/master/Screenshot.PNG" height = 500px>
 
 ## Usage
 
