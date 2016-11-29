@@ -217,11 +217,11 @@
     }
 }
 
+// When an event is tapped on
 -(void)tappedEvent:(UITapGestureRecognizer *)tapRecognizer{
     Event *event = (Event *)tapRecognizer.view;
     [self stopAllEditing];
     [event startEditing];
-    NSLog(@"%@", event.name);
 }
 
 -(void)createTickTimes{
