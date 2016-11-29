@@ -39,6 +39,6 @@
 -(void)setFont:(UIFont*)font;
 -(void)goToTime:(NSString *)time;
 -(void)checkForSameNames:(Event *)addedEvent;
--(void)addEventWithStartIndex:(int)startIndex EndIndex:(int)endIndex Name:(NSString *)name;
+-(Event *)addEventWithStartIndex:(int)startIndex EndIndex:(int)endIndex Name:(NSString *)name;
 
 @end

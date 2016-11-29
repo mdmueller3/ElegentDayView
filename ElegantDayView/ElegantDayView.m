@@ -310,9 +310,9 @@
     }
 }
 
--(void)addEventWithStartIndex:(int)startIndex EndIndex:(int)endIndex Name:(NSString *)name{
+-(Event *)addEventWithStartIndex:(int)startIndex EndIndex:(int)endIndex Name:(NSString *)name{
     if(startIndex < 0 || endIndex >= [_ticks count] || startIndex >= endIndex){
-        return;
+        return nil;
     }
     
     _currentEvent = [[Event alloc] init];
@@ -340,6 +340,8 @@
     
     [self addSubview:_currentEvent];
     [self setContentOffset:CGPointMake(0,_currentEvent.frame.origin.y - self.frame.size.height/2 + 50) animated:YES];
+    
+    return _currentEvent;
 }
 
 @end
