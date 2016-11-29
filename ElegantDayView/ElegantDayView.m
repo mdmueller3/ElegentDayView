@@ -43,12 +43,6 @@
     
     _events = [[NSMutableArray alloc] init];
     
-//    [self createSampleEvents];
-    [self addEvents:_events];
-    
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(EDVTap:)];
-//    [self addGestureRecognizer:tap];
-    
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdAction:)];
     [self addGestureRecognizer:longPress];
 }
@@ -316,21 +310,36 @@
     }
 }
 
--(void)addEvents:(NSArray*)events{
-    for(Event *event in events){
-        
-        int start = event.startIndex;
-        int end = event.endIndex;
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedEvent:)];
-        [event addGestureRecognizer:tap];
-        
-        Tick *startTick = [_ticks objectAtIndex:start];
-        
-        CGRect frame = CGRectMake((startTick.lineStart.x+45) + 25, startTick.frame.origin.y, (startTick.lineEnd.x - startTick.lineStart.x) - 50, [self getHeightFromStartIndex:start EndIndex:end]);
-        [event setupWithFrame:frame];
-        [self addSubview:event];
+-(void)addEventWithStartIndex:(int)startIndex EndIndex:(int)endIndex Name:(NSString *)name{
+    if(startIndex < 0 || endIndex >= [_ticks count] || startIndex >= endIndex){
+        return;
     }
+    
+    _currentEvent = [[Event alloc] init];
+    if(_randomEventColors){
+        int r = arc4random_uniform((int)[_eventColors count]);
+        while(r == _lastRandom){
+            r = arc4random_uniform((int)[_eventColors count]);
+        }
+        _lastRandom = r;
+        
+        [_currentEvent setColor:[_eventColors objectAtIndex:r]];
+    }
+    [_currentEvent setFont:_font];
+    _currentEvent.startIndex = startIndex;
+    _currentEvent.endIndex = endIndex;
+    Tick *tick = [_ticks objectAtIndex:startIndex];
+    CGRect eventFrame = [self getEventFrameFromTick:tick];
+    eventFrame.size.height = _tickHeight * (endIndex - startIndex);
+    [_currentEvent setupWithFrame:eventFrame];
+    [_currentEvent setName:name];
+    [_events addObject:_currentEvent];
+    
+    [self checkForCollisionsWithEvent:_currentEvent];
+    [self checkForSameNames:_currentEvent];
+    
+    [self addSubview:_currentEvent];
+    [self setContentOffset:CGPointMake(0,_currentEvent.frame.origin.y - self.frame.size.height/2 + 50) animated:YES];
 }
 
 @end
