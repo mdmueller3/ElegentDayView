@@ -38,5 +38,6 @@
 -(void)addEvents:(NSArray*)events;
 -(void)setFont:(UIFont*)font;
 -(void)goToTime:(NSString *)time;
+-(void)checkForSameNames:(Event *)addedEvent;
 
 @end

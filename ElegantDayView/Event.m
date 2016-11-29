@@ -7,6 +7,7 @@
 //
 
 #import "Event.h"
+#import "ElegantDayView.h"
 
 @implementation Event
 
@@ -101,15 +102,6 @@
     _background.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
 }
 
-- (void)handleDragEvent:(id)sender forEvent:(UIEvent*)event {
-    NSLog(@"drag entered");
-}
-
--(void)swipe:(UISwipeGestureRecognizer*)swipeGesture{
-    CGPoint point = [swipeGesture locationInView:self];
-    NSLog(@"x: %f y:%f", point.x, point.y);
-}
-
 -(void)textFieldFinished:(id)sender{
     _name = _nameLabel.text;
     [self endEditing];
@@ -127,6 +119,11 @@
     _editingMode = NO;
     _deleteButton.hidden = YES;
     [_nameLabel resignFirstResponder];
+    
+    if([self.superview isKindOfClass:[ElegantDayView class]]){
+        ElegantDayView *parent = (ElegantDayView *) self.superview;
+        [parent checkForSameNames:self];
+    }
 }
 
 -(void)delete:(id)sender{

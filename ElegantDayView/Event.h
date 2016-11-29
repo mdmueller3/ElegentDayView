@@ -14,6 +14,7 @@
 @property (strong, nonatomic) UITextField *nameLabel;
 @property (strong, nonatomic) UIButton *deleteButton;
 @property (strong, nonatomic) UIView *background;
+
 @property BOOL editingMode;
 
 @property (strong, nonatomic) UIFont *font;
@@ -24,7 +25,6 @@
 
 @property (strong, nonatomic) UIColor *color;
 
--(instancetype)initWithName:(NSString *)name;
 -(void)setupWithFrame:(CGRect)frame;
 -(void)startEditing;
 -(void)endEditing;

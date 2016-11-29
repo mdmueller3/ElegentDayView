@@ -87,11 +87,11 @@
         
         // Prevents event from being created inside another event by long press on event
         // Pretty sure creating an event like this should be possible, so get rid of this later
-        for(Event *event in _events){
-            if(CGRectContainsPoint(event.frame, touchPoint)){
-                return;
-            }
-        }
+//        for(Event *event in _events){
+//            if(CGRectContainsPoint(event.frame, touchPoint)){
+//                return;
+//            }
+//        }
         
         int index = touchPoint.y/_tickHeight;
         Tick *tick;
@@ -171,6 +171,16 @@
                 [_currentEvent changeFrame:frame];
                 _currentPoint.y += _tickHeight;
             }
+        }
+    }
+}
+
+-(void)checkForSameNames:(Event *)addedEvent{
+    NSLog(@"added name: %@", addedEvent.name);
+    for(Event *event in _events){
+        NSLog(@"event name: %@", event.name);
+        if([event.name isEqualToString:addedEvent.name]){
+            [addedEvent setColor:event.color];
         }
     }
 }
@@ -287,7 +297,11 @@
 -(void)goToTime:(NSString *)time{
     for(Tick *tick in _ticks){
         if([tick.timeLabel isEqualToString:time]){
-            self.contentOffset = CGPointMake(0, tick.frame.origin.y);
+            CGFloat y = tick.frame.origin.y - self.frame.size.height;
+            if(y < 0){
+                y = 0;
+            }
+            self.contentOffset = CGPointMake(0, y);
         }
     }
 }
