@@ -196,6 +196,8 @@
 
 -(void)checkForCollisionsWithEvent:(Event *)addedEvent{
     NSMutableArray *removableEvents = [[NSMutableArray alloc] init];
+    NSMutableArray *addEvents = [[NSMutableArray alloc] init];
+
     for(Event *event in _events){
         if([addedEvent isEqual:event]){
             continue;
@@ -225,12 +227,29 @@
                 event.startIndex += difference;
                 [event changeFrame:CGRectMake(event.frame.origin.x, event.frame.origin.y + (_tickHeight * difference), event.frame.size.width, event.frame.size.height - (_tickHeight * difference))];
             }
+        } else if (addedEvent.startIndex >= event.startIndex && addedEvent.endIndex <= event.endIndex){
+            // Collision type #5: New event is created inside old event
+            if(addedEvent.startIndex == event.startIndex && addedEvent.endIndex == event.endIndex){
+                // Check if colliding event is completely encapsulated
+                [removableEvents addObject:event];
+            } else {
+                int difference = event.endIndex - addedEvent.startIndex;
+                Event *duplicatedEvent = [self addEventQuietlyWithStartIndex:addedEvent.endIndex-1 EndIndex:event.endIndex-1];
+                [event changeFrame:CGRectMake(event.frame.origin.x, event.frame.origin.y, event.frame.size.width, event.frame.size.height - (_tickHeight * difference))];
+                [duplicatedEvent setName:event.name];
+                [addEvents addObject:duplicatedEvent];
+                event.endIndex = addedEvent.startIndex;
+                [duplicatedEvent setColor:event.color];
+            }
         }
     }
     
     for(Event *event in removableEvents){
         [_events removeObject:event];
         [event removeFromSuperview];
+    }
+    for(Event *event in addEvents){
+        [_events addObject:event];
     }
 }
 
@@ -332,7 +351,7 @@
         return nil;
     }
     
-    _currentEvent = [[Event alloc] init];
+    Event *event = [[Event alloc] init];
     if(_randomEventColors){
         int r = arc4random_uniform((int)[_eventColors count]);
         while(r == _lastRandom){
@@ -340,24 +359,48 @@
         }
         _lastRandom = r;
         
-        [_currentEvent setColor:[_eventColors objectAtIndex:r]];
+        [event setColor:[_eventColors objectAtIndex:r]];
     }
-    [_currentEvent setFont:_font];
-    _currentEvent.startIndex = startIndex;
-    _currentEvent.endIndex = endIndex;
+    [event setFont:_font];
+    event.startIndex = startIndex;
+    event.endIndex = endIndex;
     Tick *tick = [_ticks objectAtIndex:startIndex];
     CGRect eventFrame = [self getEventFrameFromTick:tick];
     eventFrame.size.height = _tickHeight * (endIndex - startIndex);
-    [_currentEvent setupWithFrame:eventFrame];
-    [_currentEvent setName:name];
+    [event setupWithFrame:eventFrame];
+    [event setName:name];
     [_events addObject:_currentEvent];
     
-    [self checkForCollisionsWithEvent:_currentEvent];
-    [self checkForSameNames:_currentEvent];
+    [self checkForCollisionsWithEvent:event];
+    [self checkForSameNames:event];
     
-    [self addSubview:_currentEvent];
+    [self addSubview:event];
     
-    return _currentEvent;
+    return event;
+}
+
+-(Event *)addEventQuietlyWithStartIndex:(int)startIndex EndIndex:(int)endIndex{    
+    Event *event = [[Event alloc] init];
+    if(_randomEventColors){
+        int r = arc4random_uniform((int)[_eventColors count]);
+        while(r == _lastRandom){
+            r = arc4random_uniform((int)[_eventColors count]);
+        }
+        _lastRandom = r;
+        
+        [event setColor:[_eventColors objectAtIndex:r]];
+    }
+    [event setFont:_font];
+    event.startIndex = startIndex;
+    event.endIndex = endIndex;
+    Tick *tick = [_ticks objectAtIndex:startIndex];
+    CGRect eventFrame = [self getEventFrameFromTick:tick];
+    eventFrame.size.height = _tickHeight * (endIndex - startIndex);
+    [event setupWithFrame:eventFrame];
+    
+    [self addSubview:event];
+    
+    return event;
 }
 
 @end
