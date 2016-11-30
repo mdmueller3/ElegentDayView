@@ -126,7 +126,12 @@
 }
 
 -(void)delete:(id)sender{
-    [self removeFromSuperview];
+    // Check if superview is parent (it always will be, just being safe :) )
+    if([self.superview isKindOfClass:[ElegantDayView class]]){
+        ElegantDayView *parent = (ElegantDayView *) self.superview;
+        // Check for same names in all of events
+        [parent removeEvent:self];
+    }
 }
 
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{

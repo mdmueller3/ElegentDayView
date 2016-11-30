@@ -189,6 +189,11 @@
     }
 }
 
+-(void)removeEvent:(Event *)event{
+    [_events removeObject:event];
+    [event removeFromSuperview];
+}
+
 -(void)checkForCollisionsWithEvent:(Event *)addedEvent{
     NSMutableArray *removableEvents = [[NSMutableArray alloc] init];
     for(Event *event in _events){
@@ -197,6 +202,7 @@
         }
         
         if(addedEvent.startIndex < event.startIndex && (addedEvent.endIndex > event.startIndex && addedEvent.endIndex < event.endIndex)){
+            NSLog(@"collision!");
             // Collision type #1: New event starts above the event but ends in the middle of it
             int difference = addedEvent.endIndex - event.startIndex;
             event.startIndex += difference;
@@ -207,7 +213,18 @@
             event.endIndex -= difference;
             [event changeFrame:CGRectMake(event.frame.origin.x, event.frame.origin.y, event.frame.size.width, event.frame.size.height - (_tickHeight * difference))];
         } else if (addedEvent.startIndex < event.startIndex && addedEvent.endIndex > event.endIndex){
+            // Collision type #3: New event completely encapsulates event
             [removableEvents addObject:event];
+        } else if (addedEvent.startIndex == event.startIndex){
+            // Collision type #4: New event starts at same spot as old event
+            if(addedEvent.endIndex >= event.endIndex){
+                // If new event is longer than colliding event, just remove
+                [removableEvents addObject:event];
+            } else {
+                int difference = addedEvent.endIndex - event.startIndex;
+                event.startIndex += difference;
+                [event changeFrame:CGRectMake(event.frame.origin.x, event.frame.origin.y + (_tickHeight * difference), event.frame.size.width, event.frame.size.height - (_tickHeight * difference))];
+            }
         }
     }
     

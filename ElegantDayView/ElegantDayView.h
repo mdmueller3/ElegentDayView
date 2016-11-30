@@ -38,5 +38,6 @@
 -(void)goToTime:(NSString *)time;
 -(void)checkForSameNames:(Event *)addedEvent;
 -(Event *)addEventWithStartIndex:(int)startIndex EndIndex:(int)endIndex Name:(NSString *)name;
+-(void)removeEvent:(Event *)event;
 
 @end
