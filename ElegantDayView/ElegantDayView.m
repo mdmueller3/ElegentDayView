@@ -204,7 +204,6 @@
         }
         
         if(addedEvent.startIndex < event.startIndex && (addedEvent.endIndex > event.startIndex && addedEvent.endIndex < event.endIndex)){
-            NSLog(@"collision!");
             // Collision type #1: New event starts above the event but ends in the middle of it
             int difference = addedEvent.endIndex - event.startIndex;
             event.startIndex += difference;
