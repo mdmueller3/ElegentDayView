@@ -14,10 +14,3 @@ EDV operates in either editing or display mode. In editing mode, the user can in
 Display mode is simply for showing the events during the day. Here's an example of what display mode may look like within an app:
 
 <img src = "https://github.com/mdmueller3/ElegentDayView/blob/master/Screenshot%202.PNG" height = 500px>
-
-Note: The content outside of the ElegantDayView portion is not provided (It's a screenshot from an application called [Routine Pro](http://routine.mdmueller.me/))
-
-## TODO
-- Still a few bugs when creating events that I need to work out
-- ElegantDayView may not look so elegant on screens other than iPhone 6
-- More customization
